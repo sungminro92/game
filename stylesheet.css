@@ -1,0 +1,67 @@
+/* background image is set full screen */
+body {
+	background: linear-gradient(#99e6ff	,#66ff99);
+	text-align: center;
+}
+
+/* title/logo */
+#logo {
+	margin-top: 25px;
+	padding-bottom: 25px;
+}
+
+#difficulty {
+	float: left;
+	display: inline;
+	margin-left: 10%;
+	padding-top: 10%;
+}
+
+.difficultyBttn {
+	display: block;
+	width: 100px;
+	height: 45px;
+	font-size: 25px;
+	background-color: white;
+	border: none;
+	margin: 10px;
+}
+/* HangmanBox stylesheet*/
+div.freemonBox {
+	background-image: #2a3638;
+	border-top: 15px solid black;
+	border-bottom: 15px solid black; 
+	width: 400px;
+	height: 250px;
+	margin: 0 auto;
+	margin-bottom: 20px;
+}
+
+p.instruction {
+	text-align: center;
+	font-family: 'Press Start 2P', cursive;
+	font-size: 20px;
+	padding: 10px 0px 10px 0px;
+}
+
+.letters {
+	text-align: center;
+	font-family: 'Press Start 2P', cursive;
+	font-size: 30px;
+	background-color: white;
+	border-radius: 47px;
+	border-style: none;
+	width: 47px;
+	height: 47px;
+	margin: 5px;
+	font-size: 24px;
+	font-weight: bold;
+}
+
+.letterGuessDiv {
+	width: 25px;
+	height: 30px;
+	padding: 5px;
+	border-bottom: 1px solid black;
+	margin: 0px 5px 0px 5px;
+}
