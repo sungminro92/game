@@ -1,5 +1,14 @@
+/*
+TO - DO
+* win / lose screen - play again, quit
+* update score
+* hang mon 철장?
+*
+*/
+
+
 // Array of word possibilities in the game
-const easyWordBank = ['PICKACHU','IVY','CHARMANDER','BULBASAUR','SQUIRTLE','BUTTERFREE','PIDGEY','PSYDUCK','CLEFAIRY','DIGLETT'];
+const easyWordBank = ['PIKACHU','IVY','CHARMANDER','BULBASAUR','SQUIRTLE','BUTTERFREE','PIDGEY','PSYDUCK','CLEFAIRY','DIGLETT'];
 const hardWordBank = ['CLOYSTER','ALAKAZAM','KANGASKHAN','RHYDON','GYRADOS','TYPHLOSION','WEEZING','EXEGGUTOR','WIGGLYTUFF','MACHAMP'];
 
 
@@ -9,8 +18,9 @@ const GameStatusData = {
     isPlaying: false, // the status of the game
     //playerTurn: 0, // indicates 'who is playing' supports multiplayers
     difficultyLevel: null, // refers to 'difficulty level'
-    pokeId: "",
-    wordBank: null,
+    pokeId: null,  // selected pokemon image
+    wordBank: null, // which wordbank to get word from
+    word: null, // current word
 
     setDifficultyLevel(level) {
       this.difficultyLevel = level;
@@ -28,9 +38,25 @@ const GameStatusData = {
     addUser(name) {
       this.user.push({
         userName: name,
-        score: 0,
+        score: 0
       });
     },
+
+    chooseRandomWord() {
+      var word = this.wordBank[Math.floor(Math.random()*this.wordBank.length)];
+      this.word = word;
+      return word;
+    },
+
+    letterInWord(letter) {
+      for (i=0;i<this.word.length;i++) {
+        if (letter == this.word[i]) {
+          return true;
+        }
+      }
+      return false;
+    },
+
     startGame(){
       if (this.isPlaying == false) {
       this.isPlaying = true;
@@ -54,44 +80,21 @@ const GameStatusData = {
 
 // User Interface //     
 const ViewEngine = {
-  startGame() {
-    $("#startPage").hide(1000);
-    $(".gameScreen").show(1000);
-    this.showMysteryWord();
-  },
-
-  showMysteryWord() {
-    wordBank = GameStatusData.wordBank;
-    var words = wordBank[Math.floor(Math.random()*wordBank.length)];
-    var wordLetters = words.split(""); 
-    for (i = 0; i < wordLetters.length; i++) {
-      $('#letterGuess').append('<div class="letterGuessDiv" id="letter'+i+'">'+'</div>')
-    }
-  },
-
-  revealLetter(letter) {
-
-  },
-
-  endGame() {
-
-  }
-
-};
-
-// Top Level Application Code //
-const GameController = {
   prepareLetterBoard() {
    var letterBank = $('.alphabetLists');
     
+    // http://www.kerryr.net/pioneers/ascii2.htm
     for (i =0;i<26;i++) {
-       var letter = String.fromCharCode(65 + i)
+       // https://www.w3schools.com/jsref/jsref_fromCharCode.asp
+       var letter = String.fromCharCode(65 + i);
+       // ASCII code --- A is 65 --- show corresponding alphabets
        var letterButton = document.createElement("button");
        $(letterButton).text(letter);
        $(letterButton).attr('id',letter);
        $(letterButton).addClass('letters');
-       $(letterButton).addClass('unused');
-       //$(letterButton).attr('onclick','makeUsed(${}');
+       //$(letterButton).addClass('unused');
+       // https://teamtreehouse.com/community/jquery-click-method-using-named-function
+       $(letterButton).click({letterId:letter},this.markUsed);
        if (i == 13) {
           $(letterBank).append("<br>");
        }
@@ -99,10 +102,56 @@ const GameController = {
     }
   },
 
+  startGame() {
+    $("#startPage").hide(1000);
+    $(".gameScreen").show(1000);
+  },
+
+  // Hidden Word -> _ _ _ _ _ 
+  showMysteryWord(word) {
+    for (i = 0; i < word.length; i++) {
+      $('#letterGuess').append('<div class="letterGuessDiv" id="letter'+i+'">'+'</div>')
+    }
+  },
+
+  revealLetter(letter) {
+    var wordArray = GameStatusData.word.split("");
+    for (i=0;i<wordArray.length;i++) {
+      if (letter == wordArray[i]) {
+        $('#letter'+i).text(letter);
+      }
+    }
+  },
+
+  endGame() {
+
+  },
+
+  markUsed(event) { // TO-DO : mark different when wrong letter
+    var letterId = event.data.letterId;
+    if (GameStatusData.letterInWord(letterId)) {
+      $('#'+letterId).addClass('selected');
+      ViewEngine.revealLetter(letterId);
+    } else {
+      $('#'+letterId).addClass('wrong-selected');
+    }
+  },
+
+
+
+};
+
+
+// Top Level Application Code //
+const GameController = {
+
   handleGameStart() {
     var name = $('#userName').val();
     GameStatusData.addUser(name);
-    ViewEngine.startGame();
+    var word = GameStatusData.chooseRandomWord();
+    ViewEngine.showMysteryWord(word);
+    var word = ViewEngine.startGame();
+    ViewEngine.prepareLetterBoard();
   },
 
 // https://teamtreehouse.com/community/jquery-click-method-using-named-function
@@ -144,14 +193,6 @@ const GameController = {
     }
 }
 
-// This function will pick word.
-function generateEmptyWordBox() {
-
-}
-
-// PREPARE LETTERS FUNCTION
-
-
 
 /* Function Gameover() when letters are chose for 10 times
 - it's game over
@@ -159,9 +200,8 @@ function generateEmptyWordBox() {
 */
 
  window.onload = function(){
-  GameController.prepareLetterBoard();
-  generateEmptyWordBox();
-  
+  // https://teamtreehouse.com/community/jquery-click-method-using-named-function
+  // Connect buttons and Top-Level functions
   $('#easyBttn').click({buttonId:'easyBttn'},GameController.selectDifficultyButton);
   $('#hardBttn').click({buttonId:'hardBttn'},GameController.selectDifficultyButton);
   $('#poke1').click({pokeId:'poke1'},GameController.selectPokeButton);

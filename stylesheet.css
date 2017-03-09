@@ -100,8 +100,13 @@ img.freemon {;
 	border-bottom: 1px solid black;
 	margin: 0px 5px 0px 5px;
 }
-
+/* selected buttons */
 .selected {
 	background-color: gray;
+	color:white;
+}
+
+.wrong-selected {
+	background-color: red;
 	color:white;
 }
