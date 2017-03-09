@@ -9,28 +9,55 @@
 	<link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
 	<title> FREEMON </title>
 </head>
-<body>
-	<div id="logo"><img src="http://i.imgur.com/hWvDDEP.png" style="width:500px" ></div>
-
-	<button id="easyBttn" class="difficultyBttn"> EASY </button>
-	<button id="hardBttn" class="difficultyBttn"> HARD </button> </div>
-
-<!-- win gets one point -->
-	<div id="score">SCORE:<span>00</span></div>
-	
-<!-- freemon illustration -->
-	<div class="freemonBox">
-		<img src="">
+<body >
+	<div id="logo">
+		<img src="http://i.imgur.com/hWvDDEP.png" style="width:500px" >
 	</div>
+<!-- START PAGE -->
+	<div id="startPage">
+  			<div class="userInfo">User name:<br><br><input id="userName" type="text" name="fname"></div>
+  			<p>DifficultyLevel:</p>
+		<div class="difficultyBttns">
+			<button type = "button"id="easyBttn" class="bttn">EASY</button>
+			<button id="hardBttn" class="bttn">HARD</button>
+		</div>
+		<p>Select Pokemon to free</p>
+			<button id="poke1">
+				<img  class="freemon" src="http://i.imgur.com/BPV7lgz.png">
+			</button>
+			<button id="poke2">
+				<img class="freemon" src="http://i.imgur.com/UulaHdM.png">
+			</button>
+			<button id="poke3">
+				<img class="freemon" src="http://i.imgur.com/9jdOxOj.png">
+			</button>
+			<button id="poke4">
+				<img class="freemon" src="http://i.imgur.com/DHPLNaD.png">
+			</button>
 
-	<div id="letterGuess"></div>
-
-	<div><p class="instruction">Pick your Letters!</p></div>
-
-	<div class="alphabetLists"></div>
+		<div>
+			<button id="playGame" class="bttn">PLAY</button>
+		</div>
+	</div>
+<!-- WIN GETS ONE POINT -->
 	
-	<div class="ives"></div>
+<!-- FREEMON BOX -->
+	<div class="gameScreen" style="display:none">
+		<div id="score">SCORE:<span>00</span></div>
+		<div class="freemonBox">
+			<img id="1" class="freemon" src="http://i.imgur.com/BPV7lgz.png">
+		</div>
 
+		<div id="letterGuess"></div>
+
+		<div>
+			<p class="instruction">Pick your Letters!</p>
+		</div>
+
+		<div class="alphabetLists"></div>
+		
+		
+	</div>
 
 </body>
 </html>
