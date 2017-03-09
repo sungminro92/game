@@ -1,130 +1,136 @@
 /* background image is set full screen */
 html {
-	background: linear-gradient(#99e6ff	,#66ff99);
-	font-family: 'Press Start 2P', cursive;
-	height: 100%;
+   background: linear-gradient(#99e6ff   ,#66ff99);
+   font-family: 'Press Start 2P', cursive;
+   height: 100%;
 }
 
 body {
-	text-align: center;
+   text-align: center;
 }
 
 button {
-	font-family: inherit;
+   font-family: inherit;
 }
 
 /* title/logo */
-#logo {
-	margin-top: 25px;
-	padding-bottom: 5px;
+.logo {
+   margin-top: 25px;
+   padding-bottom: 20px;
 }
 
-#difficulty {
-	width: 100px;
-	height: 250px;
-	float: left;
-	display: inline;
-	margin-left: 5%;
-
+.startPage {
+   text-align: center;
+   margin: 0 auto;
 }
 
-#startPage {
-	text-align: center;
-	margin: 0 auto;
+#userName {
+   width: 152px;
+   height: 24px;
 }
 
-.userInfo {
-
+/*http://stackoverflow.com/questions/8083430/how-to-change-the-font-and-font-size-of-an-html-input-tag */
+input[type="text"] {
+   font-family: inherit;
+   font-size: 15px;
+   padding-left: 5px;
 }
 
-.bttn {
-	display: inline;
-	width: 100px;
-	height: 45px;
-	font-size: 20px;
-	background-color: white;
-	border: none;
-	margin: 15;
+.buttons button {
+   display: inline;
+   width: 100px;
+   height: 45px;
+   font-size: 20px;
+   background-color: white;
+   border: none;
+   margin: 15;
 }
 
 .score {
-	display: inline;
-	font-size: 20px;
-	padding-left: 10px;
-	padding-bottom: 10px;
+   display: inline;
+   font-size: 20px;
+   padding-left: 10px;
+   padding-bottom: 10px;
 
 }
 
 /* HangmanBox stylesheet*/
 div.freemonBox {
-	display: block;
-	background-image: #2a3638;
-	border-top: 15px solid black;
-	border-bottom: 15px solid black; 
-	width: 400px;
-	height: 250px;
-	margin: 0 auto;
-	margin-bottom: 20px;
-	margin-top: 20px;
+   display: block;
+   background-image: #2a3638;
+   border-top: 15px solid black;
+   border-bottom: 15px solid black; 
+   width: 400px;
+   height: 250px;
+   margin: 0 auto;
+   margin-bottom: 20px;
+   margin-top: 20px;
 }
 
 p.instruction {
-	text-align: center;
-	font-size: 20px;
-	padding: 10px 0px 10px 0px;
+   text-align: center;
+   font-size: 20px;
+   padding: 10px 0px 10px 0px;
 }
 
 .letters {
-	text-align: center;
-	font-size: 30px;
-	background-color: white;
-	border-radius: 47px;
-	border-style: none;
-	width: 47px;
-	height: 47px;
-	margin: 5px;
-	font-size: 24px;
-	font-weight: bold;
+   text-align: center;
+   font-size: 30px;
+   background-color: white;
+   border-radius: 47px;
+   border-style: none;
+   width: 47px;
+   height: 47px;
+   margin: 5px;
+   font-size: 24px;
+   font-weight: bold;
 }
 
-#letterGuess {}
+.letterGuess {}
+
+.freemonshow {
+   text-align: :center;
+   z-index: -1;
+   height: 220px;
+   padding-top: 20px;
+}
 
 #playGame {
-	margin-top: 20px;
-	width: 120px;
-	height: 60px;
-	font-size: 25px;
+   margin-top: 20px;
+   width: 120px;
+   height: 60px;
+   font-size: 25px;
 }
 
 img.freemon {;
-	height: 150px;
+   height: 150px;
 }
 
 .letterGuessDiv {
-	padding: 5px;
-	display: inline;
-	width: 40px;
-	height: 30px;
-	padding: 5px;
-	border-bottom: 1px solid black;
-	margin: 0px 5px 0px 5px;
+   padding: 5px;
+   display: inline;
+   width: 40px;
+   height: 30px;
+   padding: 5px;
+   border-bottom: 1px solid black;
+   margin: 0px 5px 0px 5px;
 }
 /* selected buttons */
 .selected {
-	background-color: gray;
-	color:white;
+   background-color: gray !important;
+   color:white;
 }
 
 .wrong-selected {
-	background-color: red;
-	color:white;
+   background-color: red;
+   color:white;
 }
 
 .wrongBar {
-	display: inline;
-	float: left;
-	width: 14px;
-	height: 250px;
-	background-color: black;
-	margin-left: 24px;
+   display: inline;
+   float: left;
+   width: 14px;
+   height: 250px;
+   background-color: black;
+   margin-left: 24px;
 }

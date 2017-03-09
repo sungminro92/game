@@ -21,7 +21,8 @@ const GameStatusData = {
     pokeId: null,  // selected pokemon image
     wordBank: null, // which wordbank to get word from
     word: null, // current word
-    guess: 10, //
+    guess: 9, //
+    score:0,
 
     setDifficultyLevel(level) {
       this.difficultyLevel = level;
@@ -66,9 +67,7 @@ const GameStatusData = {
     },
 
     endGame(){
-      if (this.isPlaying !== false) {
-        this.isPlaying = false;
-      }
+      this.guess = 0;
     },
 
     resetGame() {
@@ -82,8 +81,9 @@ const GameStatusData = {
       this.guess = 10;
 
     },
-
-    keepScore () {},
+    keepScore () {
+      this.score = 0;
+    },
 };
 
 // User Interface //     
@@ -111,30 +111,29 @@ const ViewEngine = {
   },
 
   startGame() {
-    $("#startPage").hide(1000);
+    $(".startPage").hide(1000);
     $(".gameScreen").show(1000);
   },
 
   // Hidden Word -> _ _ _ _ _ 
   showMysteryWord(word) {
     for (i = 0; i < word.length; i++) {
-      $('#letterGuess').append('<div class="letterGuessDiv" id="letter'+i+'">'+'</div>')
+      $('.letterGuess').append('<div class="letterGuessDiv" id="letter'+i+'">'+'</div>')
     }
   },
 
-  // showing chosen pokemon!! -------- *** NEW ***
-  // showChosenFreemon(){
-  //   GameStatusData.setPokemon(event.data.pokeId);
-  //   if ((event.data.pokeId) = "poke1") {
-  //     $('.freemonBox').append('<img class="freemonshow" src="http://i.imgur.com/BPV7lgz.png" />');
-  //   } else if ((event.data.pokeId) ="poke2") {
-  //     $('.freemonBox').append('<img class="freemonshow" src="http://i.imgur.com/UulaHdM.png" />');
-  //   } else if ((event.data.pokeI) = "poke3") {
-  //     $('.freemonBox').append('<img class="freemonshow" src="http://i.imgur.com/9jdOxOj.png" />');
-  //   } else if ((event.data.pokeI) = "poke4") {
-  //     $('.freemonBox').append('<img class="freemonshow" src="http://i.imgur.com/DHPLNaD.png" />');
-  //   }
-  // },
+   // showing chosen pokemon!! -------- *** NEW ***
+   showChosenFreemon(pokeId){
+     if (pokeId == "poke1") {
+       $('.freemonBox').append('<img class="freemonshow" src="http://i.imgur.com/BPV7lgz.png" />');
+     } else if (pokeId =="poke2") {
+       $('.freemonBox').append('<img class="freemonshow" src="http://i.imgur.com/UulaHdM.png" />');
+     } else if (pokeId == "poke3") {
+       $('.freemonBox').append('<img class="freemonshow" src="http://i.imgur.com/9jdOxOj.png" />');
+     } else if (pokeId == "poke4") {
+       $('.freemonBox').append('<img class="freemonshow" src="http://i.imgur.com/DHPLNaD.png" />');
+     }
+   },
 
   revealLetter(letter) {
     var wordArray = GameStatusData.word.split("");
@@ -146,8 +145,12 @@ const ViewEngine = {
   },
 
   endGame() {
+    if (GameStatusData.guess <= 0) {
+      $('.freemonBox').empty();
+      $('.freemonBox').append('<h1 style="colo:red">GAME OVER</h1>');
+      $('.letters, .instruction, .letterGuess').hide();
+    }
     // if the user reaches 10 selected click, the the game ends.
-
   },
 
   markUsed(event) { // TO-DO : mark different when wrong letter
@@ -157,8 +160,9 @@ const ViewEngine = {
       ViewEngine.revealLetter(letterId);
     } else {
       $('#'+letterId).addClass('wrong-selected');
-      $('.freemonBox').append('<div class="wrongBar">')
-      $('span').text(GameStatusData.guess --);
+      $('.freemonBox').append('<div class="wrongBar" style="z-index:1">')
+      $('.liveLeftNum').text(GameStatusData.guess --);
+      
     }
   },
 
@@ -175,8 +179,9 @@ const GameController = {
     ViewEngine.showMysteryWord(word);
     var word = ViewEngine.startGame();
     ViewEngine.prepareLetterBoard();
+    var pokeId = GameStatusData.pokeId;
+    ViewEngine.showChosenFreemon(pokeId);
   },
-
 // https://teamtreehouse.com/community/jquery-click-method-using-named-function
   selectDifficultyButton(event) {
     var level = $('#'+event.data.buttonId).text();
@@ -214,6 +219,7 @@ const GameController = {
           $('#poke3').removeClass("selected");
       }  
     }
+
 }
 
 

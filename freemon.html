@@ -1,68 +1,64 @@
-
 <!DOCTYPE html>
 <html>
 <head>
-	<title>FREEMON!</title>
-	<script src="freemon.js"></script>
-	<script src="https://code.jquery.com/jquery-3.1.1.js"></script>
-	<link rel="stylesheet" type="text/css" href="stylesheet.css">
-	<link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
-	<title> FREEMON! </title>
+   <title>FREEMON!</title>
+   <script src="freemon.js"></script>
+   <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+   <link rel="stylesheet" type="text/css" href="stylesheet.css">
+   <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
 </head>
 <body >
-	<div id="logo">
-		<img src="http://i.imgur.com/hWvDDEP.png" style="width:500px" >
-	</div>
+   <div class="logo">
+      <img src="http://i.imgur.com/hWvDDEP.png" style="width:500px" >
+   </div>
 <!-- START PAGE -->
-	<div id="startPage">
-  			<div class="userInfo">User name:<br><br><input id="userName" type="text" name="fname"></div>
-  			<p>DifficultyLevel:</p>
-		<div class="difficultyBttns">
-			<button type = "button"id="easyBttn" class="bttn">EASY</button>
-			<button id="hardBttn" class="bttn">HARD</button>
-		</div>
-		<p>Select Pokemon to free</p>
-			<button id="poke1">
-				<img  class="freemon" src="http://i.imgur.com/BPV7lgz.png">
-			</button>
-			<button id="poke2">
-				<img class="freemon" src="http://i.imgur.com/UulaHdM.png">
-			</button>
-			<button id="poke3">
-				<img class="freemon" src="http://i.imgur.com/9jdOxOj.png">
-			</button>
-			<button id="poke4">
-				<img class="freemon" src="http://i.imgur.com/DHPLNaD.png">
-			</button>
+   <div class="startPage">
+      <div class="userInfo">
+         User Name:<br><br>
+         <input id="userName" type="text" name="fname">
+      </div>
+      <p>Difficulty Level:</p>
+      <div class="buttons">
+         <button id="easyBttn">EASY</button>
+         <button id="hardBttn">HARD</button>
+      </div>
+      <p>Select Pokemon to free</p>
+         <button id="poke1">
+            <img  class="freemon" src="http://i.imgur.com/BPV7lgz.png">
+         </button>
+         <button id="poke2">
+            <img class="freemon" src="http://i.imgur.com/UulaHdM.png">
+         </button>
+         <button id="poke3">
+            <img class="freemon" src="http://i.imgur.com/9jdOxOj.png">
+         </button>
+         <button id="poke4">
+            <img class="freemon" src="http://i.imgur.com/DHPLNaD.png">
+         </button>
 
-		<div>
-			<button id="playGame" class="bttn">PLAY</button>
-		</div>
-	</div>
+      <div class="buttons">
+         <button id="playGame">PLAY</button>
+      </div>
+   </div>
 <!-- WIN GETS ONE POINT -->
-	
+   
 <!-- FREEMON BOX -->
-	<div class="gameScreen" style="display:none">
-		<div class="score">SCORE:<span>00</span></div>
-		<div id="lefeLives" class="score" style="display:inline">LIVES LEFT:<span>10</span>
-		<div class="freemonBox"> 
-		<!-- INSERT CHOSEN CHARACTER HERE! -->
+   <div class="gameScreen" style="display:none">
+      <div class="score">SCORE:<span class="scoreNum">00</span></div>
+      <div class="score" style="display:inline">LIVES LEFT:<span class="liveLeftNum">10</span>
+      <div class="freemonBox"> 
+      <!-- INSERT CHOSEN CHARACTER HERE! -->
+      </div>
+      
+      <div class="letterGuess"></div>
 
-		</div>
-
-		<div id="letterGuess"></div>
-
-		<div>
-			<p class="instruction">Pick your Letters!</p>
-		</div>
-
-		<div class="alphabetLists"></div>
-		
-		
-	</div>
-
+      <div>
+         <p class="instruction">Pick your Letters!</p>
+      </div>
+	  <div class="alphabetLists"></div>
+      
+   </div>
 </body>
 </html>
-
 
 
