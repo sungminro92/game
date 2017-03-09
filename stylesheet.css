@@ -1,12 +1,11 @@
 /* background image is set full screen */
 html {
 	background: linear-gradient(#99e6ff	,#66ff99);
-	height: 100%;
 }
 
 body {
 	text-align: center;
-	min-width: 800px;
+	padding-bottom: 50px;
 }
 
 /* title/logo */
@@ -28,12 +27,23 @@ body {
 	display: inline;
 	width: 100px;
 	height: 45px;
-	font-size: 25px;
+	font-family: 'Press Start 2P', cursive;
+	font-size: 20px;
 	background-color: white;
 	border: none;
-	margin: 20px;
+	margin: 10px 10px 15px 0px;
+}
+
+#score {
+	display: inline;
+	width: 180px;
+	height: 45px;
+	font-family: 'Press Start 2P', cursive;
+	font-size: 20px;
+	padding-left: 10px;
 
 }
+
 /* HangmanBox stylesheet*/
 div.freemonBox {
 	display: block;
@@ -67,8 +77,12 @@ p.instruction {
 	font-weight: bold;
 }
 
+#letterGuess {}
+
 .letterGuessDiv {
-	width: 25px;
+	padding: 5px;
+	display: inline;
+	width: 40px;
 	height: 30px;
 	padding: 5px;
 	border-bottom: 1px solid black;

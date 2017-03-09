@@ -1,6 +1,6 @@
 // Array of word possibilities in the game
-const easyWords = ['PICKACHU','IVY','CHARMANDER','BULBASAUR','SQUIRTLE','BUTTERFREE','PIDGEY','PSYDUCK','CLEFAIRY','DIGLETT'];
-const hardWords = ['CLOYSTER','ALAKAZAM','KANGASKHAN','RHYDON','GYRADOS','TYPHLOSION','WEEZING','EXEGGUTOR','WIGGLYTUFF','MACHAMP'];
+const easyWordBank = ['PICKACHU','IVY','CHARMANDER','BULBASAUR','SQUIRTLE','BUTTERFREE','PIDGEY','PSYDUCK','CLEFAIRY','DIGLETT'];
+const hardWordBank = ['CLOYSTER','ALAKAZAM','KANGASKHAN','RHYDON','GYRADOS','TYPHLOSION','WEEZING','EXEGGUTOR','WIGGLYTUFF','MACHAMP'];
 
 
 // Data & Core Game Logic//
@@ -36,8 +36,8 @@ const GameStatusData = {
     resetGame() {
       this.user = [];
       this.isPlaying = false;
-      this.playerTurn: 0;
-      difficultyLevel: null;
+      this.playerTurn = 0;
+      difficultyLevel = null;
     }
 };
 
@@ -48,8 +48,8 @@ const ViewEngine = {
 
 // Top Level Application Code //
 const GameController = {
-  handleGameStart() {
-    
+  handleGameStart() { 
+
   }
 }
 
@@ -57,21 +57,19 @@ const GameController = {
 
 // This function will pick word.
 function generateEmptyWordBox() {
-  $('#easyBttn').onclick(function() {
-    var easyWords = easyWords[Math.floor(Math.random()*easyWords.length)];
-    var easyWordLetters = easyWords.split();
-    var numberOfEasyLetters = wordLetters.length;
-    for (i = 0; i < wordLetters.length; i++) {
-      $('#letterGuess').append('<div class="letterGuessDiv" id="letter'+i+'">'+easyWordLetters[i]+'</div>')
+  $('#easyBttn').click(function() {
+    var easyWords = easyWordBank[Math.floor(Math.random()*easyWordBank.length)];
+    var easyWordLetters = easyWords.split(""); 
+    for (i = 0; i < easyWordLetters.length; i++) {
+      $('#letterGuess').append('<div class="letterGuessDiv" id="letter'+i+'">'+'</div>')
     }
       $('#letterGuess')
   });
-  $('#hardBttn').onclick(function() {
-    var hardWords = hardWords[Math.floor(Math.random()*hardWords.length)];
-    var hardWordLetters = hardWords.split();
-    var numberOfEasyLetters = wordLetters.length;
-    for (i = 0; i < wordLetters.length; i++) {
-      $('#letterGuess').append('<div class="letterGuessDiv" id="letter'+i+'">'+hardWordLetters[i]+'</div>')
+  $('#hardBttn').click(function() {
+    var hardWords = hardWordBank[Math.floor(Math.random()*hardWordBank.length)];
+    var hardWordLetters = hardWords.split("");
+    for (i = 0; i < hardWordLetters.length; i++) {
+      $('#letterGuess').append('<div class="letterGuessDiv" id="letter'+i+'">'+'</div>')
   }
 });
 }
@@ -104,6 +102,7 @@ function prepareLetterBoard() {
 
  window.onload = function(){
   prepareLetterBoard();
+  generateEmptyWordBox();
  }
 
 // CREATING EMPTY LETTERBOXES
