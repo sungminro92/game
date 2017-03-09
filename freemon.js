@@ -3,7 +3,7 @@ TO - DO
 * win / lose screen - play again, quit
 * update score
 * hang mon 철장?
-*
+* d
 */
 
 
@@ -21,6 +21,7 @@ const GameStatusData = {
     pokeId: null,  // selected pokemon image
     wordBank: null, // which wordbank to get word from
     word: null, // current word
+    guess: 10, //
 
     setDifficultyLevel(level) {
       this.difficultyLevel = level;
@@ -75,7 +76,14 @@ const GameStatusData = {
       this.isPlaying = false;
       this.playerTurn = 0;
       difficultyLevel = null;
-    }
+    },
+
+    livesLeft() {
+      this.guess = 10;
+
+    },
+
+    keepScore () {},
 };
 
 // User Interface //     
@@ -114,6 +122,20 @@ const ViewEngine = {
     }
   },
 
+  // showing chosen pokemon!! -------- *** NEW ***
+  // showChosenFreemon(){
+  //   GameStatusData.setPokemon(event.data.pokeId);
+  //   if ((event.data.pokeId) = "poke1") {
+  //     $('.freemonBox').append('<img class="freemonshow" src="http://i.imgur.com/BPV7lgz.png" />');
+  //   } else if ((event.data.pokeId) ="poke2") {
+  //     $('.freemonBox').append('<img class="freemonshow" src="http://i.imgur.com/UulaHdM.png" />');
+  //   } else if ((event.data.pokeI) = "poke3") {
+  //     $('.freemonBox').append('<img class="freemonshow" src="http://i.imgur.com/9jdOxOj.png" />');
+  //   } else if ((event.data.pokeI) = "poke4") {
+  //     $('.freemonBox').append('<img class="freemonshow" src="http://i.imgur.com/DHPLNaD.png" />');
+  //   }
+  // },
+
   revealLetter(letter) {
     var wordArray = GameStatusData.word.split("");
     for (i=0;i<wordArray.length;i++) {
@@ -124,6 +146,7 @@ const ViewEngine = {
   },
 
   endGame() {
+    // if the user reaches 10 selected click, the the game ends.
 
   },
 
@@ -134,10 +157,10 @@ const ViewEngine = {
       ViewEngine.revealLetter(letterId);
     } else {
       $('#'+letterId).addClass('wrong-selected');
+      $('.freemonBox').append('<div class="wrongBar">')
+      $('span').text(GameStatusData.guess --);
     }
   },
-
-
 
 };
 
