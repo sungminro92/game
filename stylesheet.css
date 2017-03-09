@@ -1,11 +1,15 @@
 /* background image is set full screen */
 html {
 	background: linear-gradient(#99e6ff	,#66ff99);
+	font-family: 'Press Start 2P', cursive;
 }
 
 body {
 	text-align: center;
-	padding-bottom: 50px;
+}
+
+button {
+	font-family: inherit;
 }
 
 /* title/logo */
@@ -23,22 +27,28 @@ body {
 
 }
 
-.difficultyBttn {
+#startPage {
+	text-align: center;
+	margin: 0 auto;
+}
+
+#userInfo {
+}
+
+.bttn {
 	display: inline;
 	width: 100px;
 	height: 45px;
-	font-family: 'Press Start 2P', cursive;
 	font-size: 20px;
 	background-color: white;
 	border: none;
-	margin: 10px 10px 15px 0px;
+	margin: 15;
 }
 
 #score {
 	display: inline;
 	width: 180px;
 	height: 45px;
-	font-family: 'Press Start 2P', cursive;
 	font-size: 20px;
 	padding-left: 10px;
 
@@ -58,14 +68,12 @@ div.freemonBox {
 
 p.instruction {
 	text-align: center;
-	font-family: 'Press Start 2P', cursive;
 	font-size: 20px;
 	padding: 10px 0px 10px 0px;
 }
 
 .letters {
 	text-align: center;
-	font-family: 'Press Start 2P', cursive;
 	font-size: 30px;
 	background-color: white;
 	border-radius: 47px;
@@ -79,6 +87,10 @@ p.instruction {
 
 #letterGuess {}
 
+img.freemon {;
+	height: 150px;
+}
+
 .letterGuessDiv {
 	padding: 5px;
 	display: inline;
@@ -87,4 +99,9 @@ p.instruction {
 	padding: 5px;
 	border-bottom: 1px solid black;
 	margin: 0px 5px 0px 5px;
+}
+
+.selected {
+	background-color: gray;
+	color:white;
 }
