@@ -1,7 +1,12 @@
 /* background image is set full screen */
-body {
+html {
 	background: linear-gradient(#99e6ff	,#66ff99);
+	height: 100%;
+}
+
+body {
 	text-align: center;
+	min-width: 800px;
 }
 
 /* title/logo */
