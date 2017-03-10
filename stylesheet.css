@@ -25,11 +25,14 @@ button {
 }
 
 #userName {
+   text-align: center;
    width: 215px;
    height: 45px;
    font-family: inherit;
    font-size: 20px;
    padding-left: 5px;
+   border: none;
+
 }
 
 .buttons button {
@@ -40,11 +43,12 @@ button {
    background-color: white;
    border: none;
    margin: 5px;
+   box-shadow: 2px 2px 2px #000000;
 }
 
 #playGame {
    margin-top: 20px;
-   width: 500px;
+   width: 400px;
    height: 45px;
    font-size: 20px;
 }
@@ -136,7 +140,7 @@ img.freemon {;
    margin-left: 24px;
 }
 
-#startOver {
+.playAgain {
    display: block;
    width: 200px;
    height: 50px;

@@ -8,7 +8,8 @@ TO - DO
 
 
 // Array of word possibilities in the game
-const easyWordBank = ['PIKACHU','IVY','CHARMANDER','BULBASAUR','SQUIRTLE','BUTTERFREE','PIDGEY','PSYDUCK','CLEFAIRY','DIGLETT'];
+//const easyWordBank = ['PIKACHU','IVY','CHARMANDER','BULBASAUR','SQUIRTLE','BUTTERFREE','PIDGEY','PSYDUCK','CLEFAIRY','DIGLETT'];
+const easyWordBank = ['IVY','HI'];
 const hardWordBank = ['CLOYSTER','ALAKAZAM','KANGASKHAN','RHYDON','GYRADOS','TYPHLOSION','WEEZING','EXEGGUTOR','WIGGLYTUFF','MACHAMP'];
 
 
@@ -35,6 +36,15 @@ const GameStatusData = {
 
     setPokemon(pokeId) {
       this.pokeId = pokeId;
+    },    
+
+    incrementScore() {
+      this.score++;
+    },
+
+
+    decrementGuess() {
+      this.guess--;
     },
 
     addUser(name) {
@@ -45,6 +55,7 @@ const GameStatusData = {
     },
 
     chooseRandomWord() {
+
       var word = this.wordBank[Math.floor(Math.random()*this.wordBank.length)];
       this.word = word;
       return word;
@@ -63,27 +74,22 @@ const GameStatusData = {
       if (this.isPlaying == false) {
       this.isPlaying = true;
       }
-
-    },
-
-    endGame(){
-      this.guess = 0;
     },
 
     resetGame() {
-      this.user = [];
-      this.isPlaying = false;
-      this.playerTurn = 0;
-      difficultyLevel = null;
-    },
-
-    livesLeft() {
+      this.isPlaying= false;
+      this.difficultyLevel = null;
+      this.pokeId = null;
+      this.wordBank = null;
+      this.word = null;
       this.guess = 10;
-
-    },
-    keepScore () {
       this.score = 0;
     },
+
+    nextRound() {
+      this.word = null;
+      this.guess = 10;
+    }
 };
 
 // User Interface //     
@@ -121,8 +127,6 @@ const ViewEngine = {
     for (i = 0; i < word.length; i++) {
       $('.letterGuess').append('<div class="letterGuessDiv" id="letter'+i+'">'+'</div>')
     }
-    var revealedDiv = i
-
   },
 
   revealLetter(letter) {
@@ -135,7 +139,7 @@ const ViewEngine = {
   },
 
    // showing chosen pokemon!! -------- *** NEW ***
-   showChosenFreemon(pokeId){
+  showChosenFreemon(pokeId){
      if (pokeId == "poke1") {
        $('.freemonBox').append('<img class="freemonshow" src="http://i.imgur.com/BPV7lgz.png" />');
      } else if (pokeId =="poke2") {
@@ -148,38 +152,71 @@ const ViewEngine = {
    },
 
 
-  endGame() {
+  endGame() {  // GAME OVER
+
+      $('.letterGuess').empty(); 
+      $('.alphabetLists').empty();
+      $('.instruction').hide();
+      $( ".wrongBar" ).remove();
+
       $('.freemonBox').empty();
-      $('.freemonBox').append('<h1 style="colo:red; display:block">GAME OVER</h1>');
-      $('.freemonBox').append('<button id="startOver" style="display:block">PLAY AGAIN</button>')
-      $('.letters, .instruction, .letterGuess').hide();
-    // if the user reaches 10 selected click, the the game ends.
+      $('.freemonBox').append('<h1 style="color:red; display:block">GAME OVER</h1>');
+      $('.freemonBox').append('<button class="playAgain" style="display:block">PLAY AGAIN</button>');
+      $('.freemonBox button').click(GameController.handleGameStart);
+  },
+
+  nextGame() {  // GAME OVER
+      $('.letterGuess').empty();
+      $('.alphabetLists').empty();
+      $('.instruction').hide();
+      $( ".wrongBar" ).remove();
+
+      $('.freemonBox').empty();
+      $('.freemonBox').append('<h1 style="color:red; display:block">YOU WIN</h1>');
+      $('.freemonBox').append('<button class="playAgain" style="display:block">NEXT WORD</button>');
+      $('.freemonBox button').click(GameController.nextLevel);
   },
 
   markUsed(event) { // TO-DO : mark different when wrong letter
     var letterId = event.data.letterId;
-    if (GameStatusData.letterInWord(letterId)) {
+    if (GameStatusData.letterInWord(letterId)) { // corect
       $('#'+letterId).addClass('selected');
       ViewEngine.revealLetter(letterId);
-    } else {
+
+    } else { // wrong
       $('#'+letterId).addClass('wrong-selected');
-      $('#'+letterId).attr('disabled', true);
       $('.freemonBox').append('<div class="wrongBar" style="z-index:1">')
-      console.log(GameStatusData.guess);
       // if the guess value reaches 0 ( 10 guesses) --> endGame()
-      if (GameStatusData.guess > 0) {
-        $('.liveLeftNum').text(--GameStatusData.guess);
+      GameStatusData.guess--;
+      $('.liveLeftNum').text(GameStatusData.guess); // update guess
+      if (GameStatusData.guess == 0) {
+        ViewEngine.endGame(); // game over
       }
-      else {
-        ViewEngine.endGame();
-      }
+    }
+    $('#'+letterId).attr('disabled', true); // prevent double click
+    if (ViewEngine.winCheck()) {
+      GameStatusData.score++;
+      $('.scoreNum').text(GameStatusData.score);
+      ViewEngine.nextGame();
     }
   },
-    startOver(event) {
-      $('#startOver').click(GameController.handleGameStart);
 
+  winCheck() {
+    var wordArray = GameStatusData.word.split("");
+    for (i=0;i<wordArray.length;i++) {
+      if ($('#letter'+i).text() == "") {
+        return false;
+      }
     }
-
+    return true;
+  },
+  
+  playAgain() {
+    $('.scoreNum').text(GameStatusData.score);
+    GameStatusData.resetGame();
+    $('.freemonBox').empty();
+    $('.instruction').show();
+  },
 };
 
 
@@ -187,27 +224,41 @@ const ViewEngine = {
 const GameController = {
 
   handleGameStart() {
+    $('.freemonBox').empty();
+    $('.instruction').show();
     var name = $('#userName').val();
+    ViewEngine.startGame();
     GameStatusData.addUser(name);
     var word = GameStatusData.chooseRandomWord();
     ViewEngine.showMysteryWord(word);
-    ViewEngine.startGame();
     ViewEngine.prepareLetterBoard();
     var pokeId = GameStatusData.pokeId;
     ViewEngine.showChosenFreemon(pokeId);
   },
+
 // https://teamtreehouse.com/community/jquery-click-method-using-named-function
   selectDifficultyButton(event) {
     var level = $('#'+event.data.buttonId).text();
     GameStatusData.setDifficultyLevel(level);
-      if (event.data.buttonId == "easyBttn") {
-          $('#easyBttn').addClass("selected");
-          $('#hardBttn').removeClass("selected");
-      } else {
-          $('#hardBttn').addClass("selected");
-          $('#easyBttn').removeClass("selected");
-      }  
-    },
+    if (event.data.buttonId == "easyBttn") {
+        $('#easyBttn').addClass("selected");
+        $('#hardBttn').removeClass("selected");
+    } else {
+        $('#hardBttn').addClass("selected");
+        $('#easyBttn').removeClass("selected");
+    }  
+  },
+
+  nextLevel() {
+    $('.freemonBox').empty();
+    $('.instruction').show();
+    GameStatusData.nextRound();
+    ViewEngine.prepareLetterBoard();
+    var word = GameStatusData.chooseRandomWord();
+    ViewEngine.showMysteryWord(word);
+    var pokeId = GameStatusData.pokeId;
+    ViewEngine.showChosenFreemon(pokeId);
+  },
 
   selectPokeButton(event) {
     GameStatusData.setPokemon(event.data.pokeId);
@@ -233,7 +284,6 @@ const GameController = {
           $('#poke3').removeClass("selected");
       }  
     }
-
 }
 
  window.onload = function(){
@@ -252,7 +302,7 @@ const GameController = {
     });
     $("#playGame").mouseout(function(){
       $("#playGame").removeClass("mouseOver");
-      $("#playGame").text("GOTTA CATCH 'EM ALL");
+      $("#playGame").text("GOTTA FREE 'EM ALL");
     });
 }
 
