@@ -142,3 +142,8 @@ img.freemon {;
    height: 50px;
    font-size: 25px;
 }
+
+#poke1, #poke2, #poke3, #poke4 {
+   background: transparent;
+   border-style: none;
+}
