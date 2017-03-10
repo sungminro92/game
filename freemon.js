@@ -90,7 +90,7 @@ const GameStatusData = {
     }
 };
 
-// User Interface //     
+// User Interface // LISTS OF FUNCTIONS/ CALLING    
 const ViewEngine = {
   prepareLetterBoard() {
    var letterBank = $('.alphabetLists');
@@ -121,6 +121,7 @@ const ViewEngine = {
   },
 
   restartGame() {
+<<<<<<< HEAD
     $('#easyBttn').removeClass('selected');
     $('#hardBttn').removeClass('selected');
     $('#poke1').removeClass('selected');
@@ -128,6 +129,8 @@ const ViewEngine = {
     $('#poke3').removeClass('selected');
     $('#poke4').removeClass('selected');
     $('#userName').val("");
+=======
+>>>>>>> f782b5c55bd0ff337d0aca49955d0dc909d783c0
     $(".gameScreen").hide(1000);
     $(".startPage").show(1000);
     GameStatusData.resetGame();
@@ -170,12 +173,17 @@ const ViewEngine = {
       $('.instruction').hide();
       $( ".wrongBar" ).remove();
       $('.freemonBox').empty();
+<<<<<<< HEAD
       $('.freemonBox').append('<div style="color:red; display:block; margin-top:50px; font-size: 40px">GAME OVER</div>');
       $('.freemonBox').append('<button class="playAgain">PLAY AGAIN</button>');
       $(".playAgain").mouseover(function(){
         $(".playAgain").addClass("mouseOver");});
       $(".playAgain").mouseout(function(){
         $(".playAgain").removeClass("mouseOver")});
+=======
+      $('.freemonBox').append('<h1 style="color:red; display:block">GAME OVER</h1>');
+      $('.freemonBox').append('<button class="playAgain" style="display:block">PLAY AGAIN</button>');
+>>>>>>> f782b5c55bd0ff337d0aca49955d0dc909d783c0
       $('.freemonBox button').click(ViewEngine.restartGame);
   },
 
@@ -303,6 +311,7 @@ const GameController = {
     }
 }
 
+// CHOOSING USER PROFILE : USER NAME / DIFFICULTY / CHARACTER - NOT-FUNCTIONING YET
  window.onload = function(){
   // https://teamtreehouse.com/community/jquery-click-method-using-named-function
   // Connect buttons and Top-Level functions
