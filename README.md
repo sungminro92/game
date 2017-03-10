@@ -13,8 +13,8 @@ I wanted my game to look friendly and attractive to the users. So my game theme 
 - difficulty depends on how well known they are.
 
 ![](DesignProcess.JPG?raw=true)
-![](freemonLogo?raw=true)
-![](pokemon illustration?raw=true)
+![](freemonLogo.png?raw=true)
+![](pokemon illustration.png?raw=true)
 
 
 TECHNOLOGIES USED
