@@ -306,6 +306,7 @@ const GameController = {
  window.onload = function(){
   // https://teamtreehouse.com/community/jquery-click-method-using-named-function
   // Connect buttons and Top-Level functions
+  // As the .click() method is just a shorthand for .on( "click", handler ), detaching is possible using .off( "click" ).
   $('#easyBttn').click({buttonId:'easyBttn'},GameController.selectDifficultyButton);
   $('#hardBttn').click({buttonId:'hardBttn'},GameController.selectDifficultyButton);
   $('#poke1').click({pokeId:'poke1'},GameController.selectPokeButton);
