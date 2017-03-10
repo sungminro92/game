@@ -177,8 +177,6 @@ const ViewEngine = {
         $(".playAgain").addClass("mouseOver");});
       $(".playAgain").mouseout(function(){
         $(".playAgain").removeClass("mouseOver")});
-      $('.freemonBox').append('<h1 style="color:red; display:block">GAME OVER</h1>');
-      $('.freemonBox').append('<button class="playAgain" style="display:block">PLAY AGAIN</button>');
       $('.freemonBox button').click(ViewEngine.restartGame);
   },
 

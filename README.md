@@ -18,7 +18,7 @@ I wanted my game to look friendly and attractive to the users. So my game theme 
 <TECHNOLOGIES USED>
 Language - HTML / CSS / Javascript /jQuery
 Design - Photoshop / Illustrator / Google Fonts
-Project Planning & User Stories - Trello / Hand-written wireframe & sketches.
+Project Planning & User Stories - Trello(https://trello.com/b/eEjuLRkc/wdi-project1)
 support - Sublime Text 3
 
 ![](InitialPlan.JPG?raw=true)
