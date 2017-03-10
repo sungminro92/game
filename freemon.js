@@ -8,8 +8,7 @@ TO - DO
 
 
 // Array of word possibilities in the game
-//const easyWordBank = ['PIKACHU','IVY','CHARMANDER','BULBASAUR','SQUIRTLE','BUTTERFREE','PIDGEY','PSYDUCK','CLEFAIRY','DIGLETT'];
-const easyWordBank = ['IVY','HI'];
+const easyWordBank = ['PIKACHU','IVY','CHARMANDER','BULBASAUR','SQUIRTLE','BUTTERFREE','PIDGEY','PSYDUCK','CLEFAIRY','DIGLETT'];
 const hardWordBank = ['CLOYSTER','ALAKAZAM','KANGASKHAN','RHYDON','GYRADOS','TYPHLOSION','WEEZING','EXEGGUTOR','WIGGLYTUFF','MACHAMP'];
 
 
@@ -122,6 +121,13 @@ const ViewEngine = {
   },
 
   restartGame() {
+    $('#easyBttn').removeClass('selected');
+    $('#hardBttn').removeClass('selected');
+    $('#poke1').removeClass('selected');
+    $('#poke2').removeClass('selected');
+    $('#poke3').removeClass('selected');
+    $('#poke4').removeClass('selected');
+    $('#userName').val("");
     $(".gameScreen").hide(1000);
     $(".startPage").show(1000);
     GameStatusData.resetGame();
@@ -159,15 +165,17 @@ const ViewEngine = {
 
 
   endGame() {  // GAME OVER
-
       $('.letterGuess').empty(); 
       $('.alphabetLists').empty();
       $('.instruction').hide();
       $( ".wrongBar" ).remove();
-
       $('.freemonBox').empty();
-      $('.freemonBox').append('<h1 style="color:red; display:block">GAME OVER</h1>');
-      $('.freemonBox').append('<button class="playAgain" style="display:block">PLAY AGAIN</button>');
+      $('.freemonBox').append('<div style="color:red; display:block; margin-top:50px; font-size: 40px">GAME OVER</div>');
+      $('.freemonBox').append('<button class="playAgain">PLAY AGAIN</button>');
+      $(".playAgain").mouseover(function(){
+        $(".playAgain").addClass("mouseOver");});
+      $(".playAgain").mouseout(function(){
+        $(".playAgain").removeClass("mouseOver")});
       $('.freemonBox button').click(ViewEngine.restartGame);
   },
 
@@ -176,10 +184,13 @@ const ViewEngine = {
       $('.alphabetLists').empty();
       $('.instruction').hide();
       $( ".wrongBar" ).remove();
-
       $('.freemonBox').empty();
-      $('.freemonBox').append('<h1 style="color:red; display:block">YOU WIN</h1>');
-      $('.freemonBox').append('<button class="playAgain" style="display:block">NEXT WORD</button>');
+      $('.freemonBox').append('<div style="color:red; display:block; margin-top:50px; font-size: 40px">YOU WIN</div>');
+      $('.freemonBox').append('<button class="playAgain">NEXT WORD</button>');
+      $(".playAgain").mouseover(function(){
+        $(".playAgain").addClass("mouseOver");});
+       $(".playAgain").mouseout(function(){
+       $(".playAgain").removeClass("mouseOver")});
       $('.freemonBox button').click(GameController.nextLevel);
   },
 
@@ -203,7 +214,7 @@ const ViewEngine = {
     if (ViewEngine.winCheck()) {
       GameStatusData.score++;
       $('.scoreNum').text(GameStatusData.score);
-      ViewEngine.nextGame();
+      setTimeout(ViewEngine.nextGame, 2000);
     }
   },
 

@@ -67,7 +67,7 @@ button {
 
 /* HangmanBox stylesheet*/
 div.freemonBox {
-   display: flex;
+   position: abolute;
    background-image: #2a3638;
    border-top: 15px solid black;
    border-bottom: 15px solid black; 
@@ -76,6 +76,7 @@ div.freemonBox {
    margin: 0 auto;
    margin-bottom: 20px;
    margin-top: 20px;
+   text-align: center;
 }
 
 p.instruction {
@@ -95,6 +96,7 @@ p.instruction {
    margin: 5px;
    font-size: 24px;
    font-weight: bold;
+   box-shadow: 2px 2px 2px #000000;
 }
 
 .letterGuess {}
@@ -102,6 +104,7 @@ p.instruction {
 .freemonshow {
    display: flex;
    position: absolute;
+   left: 20%;
    z-index: -1;
    height: 220px;
    padding-top: 20px;
@@ -142,12 +145,15 @@ img.freemon {;
 
 .playAgain {
    display: block;
-   width: 200px;
+   width: 270px;
    height: 50px;
-   font-size: 25px;
+   font-size: 20px;
+   margin: 0 auto;
+   margin-top: 40px;
 }
 
 #poke1, #poke2, #poke3, #poke4 {
    background: transparent;
    border-style: none;
 }
+
