@@ -55,7 +55,6 @@ const GameStatusData = {
     },
 
     chooseRandomWord() {
-
       var word = this.wordBank[Math.floor(Math.random()*this.wordBank.length)];
       this.word = word;
       return word;
@@ -122,6 +121,13 @@ const ViewEngine = {
 
   },
 
+  restartGame() {
+    $(".gameScreen").hide(1000);
+    $(".startPage").show(1000);
+    GameStatusData.resetGame();
+    //GameController.handleGameStart();
+  },
+
   // Hidden Word -> _ _ _ _ _ 
   showMysteryWord(word) {
     for (i = 0; i < word.length; i++) {
@@ -162,7 +168,7 @@ const ViewEngine = {
       $('.freemonBox').empty();
       $('.freemonBox').append('<h1 style="color:red; display:block">GAME OVER</h1>');
       $('.freemonBox').append('<button class="playAgain" style="display:block">PLAY AGAIN</button>');
-      $('.freemonBox button').click(GameController.handleGameStart);
+      $('.freemonBox button').click(ViewEngine.restartGame);
   },
 
   nextGame() {  // GAME OVER
