@@ -9,6 +9,8 @@ The player is able to choose [{userName, difficultyLevel, character}] to play th
 
 <THEME>
 I wanted my game to look friendly and attractive to the users. So my game theme is Pokemon. The player’s goal is to guess the word right and to free Pokemon that is chosen from the beginning. Once the player guesses an incorrect letter, Pokemon is being confined.
+* Mystery words are Pokemon names*
+- difficulty depends on how well known they are.
 
 ![](DesignProcess.JPG?raw=true)
 

@@ -94,7 +94,7 @@ const GameStatusData = {
 const ViewEngine = {
   prepareLetterBoard() {
    var letterBank = $('.alphabetLists');
-    
+    // ASCII CODE ---> generating numbers into alphabets
     // http://www.kerryr.net/pioneers/ascii2.htm
     for (i =0;i<26;i++) {
        // https://www.w3schools.com/jsref/jsref_fromCharCode.asp
@@ -107,6 +107,7 @@ const ViewEngine = {
        //$(letterButton).addClass('unused');
        // https://teamtreehouse.com/community/jquery-click-method-using-named-function
        $(letterButton).click({letterId:letter},this.markUsed);
+       // give a break when 13th alphabet appears.
        if (i == 13) {
           $(letterBank).append("<br>");
        }
@@ -121,7 +122,6 @@ const ViewEngine = {
   },
 
   restartGame() {
-<<<<<<< HEAD
     $('#easyBttn').removeClass('selected');
     $('#hardBttn').removeClass('selected');
     $('#poke1').removeClass('selected');
@@ -129,8 +129,6 @@ const ViewEngine = {
     $('#poke3').removeClass('selected');
     $('#poke4').removeClass('selected');
     $('#userName').val("");
-=======
->>>>>>> f782b5c55bd0ff337d0aca49955d0dc909d783c0
     $(".gameScreen").hide(1000);
     $(".startPage").show(1000);
     GameStatusData.resetGame();
@@ -173,17 +171,14 @@ const ViewEngine = {
       $('.instruction').hide();
       $( ".wrongBar" ).remove();
       $('.freemonBox').empty();
-<<<<<<< HEAD
       $('.freemonBox').append('<div style="color:red; display:block; margin-top:50px; font-size: 40px">GAME OVER</div>');
       $('.freemonBox').append('<button class="playAgain">PLAY AGAIN</button>');
       $(".playAgain").mouseover(function(){
         $(".playAgain").addClass("mouseOver");});
       $(".playAgain").mouseout(function(){
         $(".playAgain").removeClass("mouseOver")});
-=======
       $('.freemonBox').append('<h1 style="color:red; display:block">GAME OVER</h1>');
       $('.freemonBox').append('<button class="playAgain" style="display:block">PLAY AGAIN</button>');
->>>>>>> f782b5c55bd0ff337d0aca49955d0dc909d783c0
       $('.freemonBox button').click(ViewEngine.restartGame);
   },
 
@@ -328,7 +323,7 @@ const GameController = {
       $(".mouseOver").text('PLAY GAME');
     });
     $("#playGame").mouseout(function(){
-      $("#playGame").removeClass("mouseOver");
+      $("#playGame").removeClass("mouseOver");-
       $("#playGame").text("GOTTA FREE 'EM ALL");
     });
 }
