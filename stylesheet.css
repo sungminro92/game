@@ -25,14 +25,10 @@ button {
 }
 
 #userName {
-   width: 152px;
-   height: 24px;
-}
-
-/*http://stackoverflow.com/questions/8083430/how-to-change-the-font-and-font-size-of-an-html-input-tag */
-input[type="text"] {
+   width: 215px;
+   height: 45px;
    font-family: inherit;
-   font-size: 15px;
+   font-size: 20px;
    padding-left: 5px;
 }
 
@@ -43,7 +39,19 @@ input[type="text"] {
    font-size: 20px;
    background-color: white;
    border: none;
-   margin: 15;
+   margin: 5px;
+}
+
+#playGame {
+   margin-top: 20px;
+   width: 500px;
+   height: 45px;
+   font-size: 20px;
+}
+
+.mouseOver {
+   color: red;
+   font-size: 20px;
 }
 
 .score {
@@ -51,7 +59,6 @@ input[type="text"] {
    font-size: 20px;
    padding-left: 10px;
    padding-bottom: 10px;
-
 }
 
 /* HangmanBox stylesheet*/
@@ -95,13 +102,6 @@ p.instruction {
    height: 220px;
    padding-top: 20px;
 }     
-
-#playGame {
-   margin-top: 20px;
-   width: 500px;
-   height: 45px;
-   font-size: 24px;
-}
 
 img.freemon {;
    height: 150px;

@@ -113,12 +113,24 @@ const ViewEngine = {
   startGame() {
     $(".startPage").hide(1000);
     $(".gameScreen").show(1000);
+
   },
 
   // Hidden Word -> _ _ _ _ _ 
   showMysteryWord(word) {
     for (i = 0; i < word.length; i++) {
       $('.letterGuess').append('<div class="letterGuessDiv" id="letter'+i+'">'+'</div>')
+    }
+    var revealedDiv = i
+
+  },
+
+  revealLetter(letter) {
+    var wordArray = GameStatusData.word.split("");
+    for (i=0;i<wordArray.length;i++) {
+      if (letter == wordArray[i]) {
+        $('#letter'+i).text(letter);
+      }
     }
   },
 
@@ -135,21 +147,12 @@ const ViewEngine = {
      }
    },
 
-  revealLetter(letter) {
-    var wordArray = GameStatusData.word.split("");
-    for (i=0;i<wordArray.length;i++) {
-      if (letter == wordArray[i]) {
-        $('#letter'+i).text(letter);
-      }
-    }
-  },
 
   endGame() {
       $('.freemonBox').empty();
       $('.freemonBox').append('<h1 style="colo:red; display:block">GAME OVER</h1>');
       $('.freemonBox').append('<button id="startOver" style="display:block">PLAY AGAIN</button>')
       $('.letters, .instruction, .letterGuess').hide();
-
     // if the user reaches 10 selected click, the the game ends.
   },
 
@@ -188,7 +191,7 @@ const GameController = {
     GameStatusData.addUser(name);
     var word = GameStatusData.chooseRandomWord();
     ViewEngine.showMysteryWord(word);
-    var word = ViewEngine.startGame();
+    ViewEngine.startGame();
     ViewEngine.prepareLetterBoard();
     var pokeId = GameStatusData.pokeId;
     ViewEngine.showChosenFreemon(pokeId);
@@ -243,6 +246,14 @@ const GameController = {
   $('#poke3').click({pokeId:'poke3'},GameController.selectPokeButton);
   $('#poke4').click({pokeId:'poke4'},GameController.selectPokeButton);
   $('#playGame').click(GameController.handleGameStart);
+      $("#playGame").mouseover(function(){
+      $("#playGame").addClass("mouseOver");
+      $(".mouseOver").text('PLAY GAME');
+    });
+    $("#playGame").mouseout(function(){
+      $("#playGame").removeClass("mouseOver");
+      $("#playGame").text("GOTTA CATCH 'EM ALL");
+    });
 }
 
 
