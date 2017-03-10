@@ -21,7 +21,7 @@ const GameStatusData = {
     pokeId: null,  // selected pokemon image
     wordBank: null, // which wordbank to get word from
     word: null, // current word
-    guess: 9, //
+    guess: 10, //
     score:0,
 
     setDifficultyLevel(level) {
@@ -145,11 +145,11 @@ const ViewEngine = {
   },
 
   endGame() {
-    if (GameStatusData.guess <= 0) {
       $('.freemonBox').empty();
-      $('.freemonBox').append('<h1 style="colo:red">GAME OVER</h1>');
+      $('.freemonBox').append('<h1 style="colo:red; display:block">GAME OVER</h1>');
+      $('.freemonBox').append('<button id="startOver" style="display:block">PLAY AGAIN</button>')
       $('.letters, .instruction, .letterGuess').hide();
-    }
+
     // if the user reaches 10 selected click, the the game ends.
   },
 
@@ -160,11 +160,22 @@ const ViewEngine = {
       ViewEngine.revealLetter(letterId);
     } else {
       $('#'+letterId).addClass('wrong-selected');
+      $('#'+letterId).attr('disabled', true);
       $('.freemonBox').append('<div class="wrongBar" style="z-index:1">')
-      $('.liveLeftNum').text(GameStatusData.guess --);
-      
+      console.log(GameStatusData.guess);
+      // if the guess value reaches 0 ( 10 guesses) --> endGame()
+      if (GameStatusData.guess > 0) {
+        $('.liveLeftNum').text(--GameStatusData.guess);
+      }
+      else {
+        ViewEngine.endGame();
+      }
     }
   },
+    startOver(event) {
+      $('#startOver').click(GameController.handleGameStart);
+
+    }
 
 };
 
@@ -222,12 +233,6 @@ const GameController = {
 
 }
 
-
-/* Function Gameover() when letters are chose for 10 times
-- it's game over
-- creates a box / console.log "Game Over"
-*/
-
  window.onload = function(){
   // https://teamtreehouse.com/community/jquery-click-method-using-named-function
   // Connect buttons and Top-Level functions
@@ -237,7 +242,6 @@ const GameController = {
   $('#poke2').click({pokeId:'poke2'},GameController.selectPokeButton);
   $('#poke3').click({pokeId:'poke3'},GameController.selectPokeButton);
   $('#poke4').click({pokeId:'poke4'},GameController.selectPokeButton);
-
   $('#playGame').click(GameController.handleGameStart);
 }
 
