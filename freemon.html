@@ -4,12 +4,18 @@
    <title>FREEMON!</title>
    <script src="freemon.js"></script>
    <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
-   <link rel="stylesheet" type="text/css" href="stylesheet.css">
    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+   <!-- Latest compiled and minified CSS -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+   <!-- Optional theme -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+   <link rel="stylesheet" type="text/css" href="stylesheet.css">
+   <!-- Latest compiled and minified JavaScript -->
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </head>
 <body >
    <div class="logo">
-      <a href="file:///Users/sungminnie/wdi_project1/freemon.html"><img src="http://i.imgur.com/hWvDDEP.png" style="width:500px" ></a>
+      <a href="freemon.html"><img src="http://i.imgur.com/hWvDDEP.png" style="width:500px" ></a>
    </div>
 <!-- START PAGE -->
    <div class="startPage">
@@ -24,19 +30,21 @@
          <button id="hardBttn">HARD</button>
       </div>
       <br>
-      <p>Select Pokemon to FREE!</p>
-     <button id="poke1">
-        <img  class="freemon" src="http://i.imgur.com/BPV7lgz.png">
-     </button>
-     <button id="poke2">
-        <img class="freemon" src="http://i.imgur.com/UulaHdM.png">
-     </button>
-     <button id="poke3">
-        <img class="freemon" src="http://i.imgur.com/9jdOxOj.png">
-     </button>
-     <button id="poke4">
-        <img class="freemon" src="http://i.imgur.com/DHPLNaD.png">
-     </button>
+      <p>Select a Pokemon to FREE!</p>
+      <div class='pokemonSelect'>
+         <button id="poke1">
+           <img class="freemon">
+         </button>
+         <button id="poke2">
+           <img class="freemon">
+         </button>
+         <button id="poke3">
+           <img class="freemon">
+         </button>
+         <button id="poke4">
+           <img class="freemon">
+         </button>
+      </div>
 
       <div class="buttons">
          <button id="playGame">GOTTA FREE 'EM ALL!</button>
@@ -47,16 +55,23 @@
 <!-- FREEMON BOX -->
 
    <div class="gameScreen" style="display:none">
-      <div class="score">SCORE:<span class="scoreNum">00</span></div>
-      <div class="score" style="display:inline">LIVES LEFT:<span class="liveLeftNum">10</span>
+      <div class="round">
+         ROUND:<span id="roundNum">0</span>
+      </div>
+      <div class="score">
+         SCORE:<span id="scoreNum">0</span>
+      </div>
+      <div class="score" style="display:inline">
+         LIVES LEFT:<span id="liveLeftNum">10</span>
+      </div>
       <div class="freemonBox">
       <!-- INSERT CHOSEN CHARACTER HERE! -->
       </div>
       <div class="buttonToGo"></div>
       <div class="letterGuess"></div>
 
-      <div>
-         <p class="instruction">Pick your Letters!</p>
+      <div class="instruction">
+         <p>Pick your Letters!</p>
       </div>
 	  <div class="alphabetLists"></div>
       

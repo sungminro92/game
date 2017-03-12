@@ -1,19 +1,37 @@
 /* background image is set full screen */
 html {
-   background: linear-gradient(#99e6ff   ,#66ff99);
-   font-family: 'Press Start 2P', cursive;
    height: 100%;
 }
 
 body {
    text-align: center;
+   background: linear-gradient(#99e6ff,#66ff99);
+   background-color: transparent;
+   font-family: 'Press Start 2P', cursive;
+   font-size:20px;
 }
 
 button {
    font-family: inherit;
 }
 
-/* title/logo */
+#poke1 img {
+   content:url("http://i.imgur.com/BPV7lgz.png");
+}
+#poke2 img {
+   content:url("http://i.imgur.com/UulaHdM.png");
+}
+#poke3 img {
+   content:url("http://i.imgur.com/9jdOxOj.png");
+}
+#poke4 img {
+   content:url("http://i.imgur.com/DHPLNaD.png");
+}
+.pokemonSelect button {
+   background: transparent;
+   border-style: none;
+}
+
 .logo {
    margin-top: 25px;
    padding-bottom: 20px;
@@ -29,17 +47,14 @@ button {
    width: 215px;
    height: 45px;
    font-family: inherit;
-   font-size: 20px;
    padding-left: 5px;
    border: none;
-
 }
 
 .buttons button {
    display: inline;
    width: 100px;
    height: 45px;
-   font-size: 20px;
    background-color: white;
    border: none;
    margin: 5px;
@@ -50,19 +65,20 @@ button {
    margin-top: 20px;
    width: 400px;
    height: 45px;
-   font-size: 20px;
 }
 
 .mouseOver {
    color: red;
-   font-size: 20px;
 }
 
 .score {
    display: inline;
-   font-size: 20px;
    padding-left: 10px;
-   padding-bottom: 10px;
+}
+
+.round {
+   font-size: 40px;
+   padding-left: 10px;
 }
 
 /* HangmanBox stylesheet*/
@@ -79,22 +95,19 @@ div.freemonBox {
    text-align: center;
 }
 
-p.instruction {
+div.instruction {
    text-align: center;
-   font-size: 20px;
    padding: 10px 0px 10px 0px;
 }
 
 .letters {
    text-align: center;
-   font-size: 30px;
    background-color: white;
    border-radius: 47px;
    border-style: none;
    width: 47px;
    height: 47px;
    margin: 5px;
-   font-size: 24px;
    font-weight: bold;
    box-shadow: 2px 2px 2px #000000;
 }
@@ -108,7 +121,7 @@ p.instruction {
    z-index: -1;
    height: 220px;
    padding-top: 20px;
-}     
+}
 
 img.freemon {;
    height: 150px;
@@ -123,7 +136,7 @@ img.freemon {;
    border-bottom: 1px solid black;
    margin: 0px 5px 0px 5px;
 }
-/* selected buttons */
+
 .selected {
    background-color: gray !important;
    color:white;
@@ -141,19 +154,14 @@ img.freemon {;
    height: 250px;
    background-color: black;
    margin-left: 24px;
+   z-index: 1;
 }
 
 .playAgain {
    display: block;
    width: 270px;
    height: 50px;
-   font-size: 20px;
    margin: 0 auto;
    margin-top: 40px;
-}
-
-#poke1, #poke2, #poke3, #poke4 {
-   background: transparent;
-   border-style: none;
 }
 
