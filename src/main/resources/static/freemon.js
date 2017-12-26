@@ -35,7 +35,7 @@ const GameStatusData = {
 
     fetchPokemon(orderId) {
         return requestPromise('/work/orders/shipping/fba/items?orderId=' + orderId);
-    }
+    },
 
     setPokemon(pokeId) {
       this.pokeId = pokeId;
