@@ -252,10 +252,12 @@ const GameController = {
     ViewEngine.startGame();
     GameStatusData.addUser(name);
     var word = GameStatusData.chooseRandomWord();
+    window.location.replace("http://localhost:8080/freemon");
     ViewEngine.showMysteryWord(word);
     ViewEngine.prepareLetterBoard();
     var pokeId = GameStatusData.pokeId;
     ViewEngine.showChosenFreemon(pokeId);
+    
   },
 
 // https://teamtreehouse.com/community/jquery-click-method-using-named-function
