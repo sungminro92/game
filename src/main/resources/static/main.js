@@ -60,12 +60,12 @@ const GameStatusData = {
     },
 
     letterInWord(letter) {
-      for (i=0;i<this.word.length;i++) {
-        if (letter == this.word[i]) {
-          return true;
-        }
-      }
-      return false;
+    		for (i=0;i<this.word.length;i++) {
+    			if (letter == this.word[i]) {
+    				return true;
+    			}
+    		}
+    		return false;
     },
 
     startGame(){
@@ -115,6 +115,16 @@ const ViewEngine = {
        $(letterBank).append(letterButton);
     }
   },
+  
+  setClickableLetterBoard(clickable) {
+	for (i =0;i<26;i++) {
+	   var letter = String.fromCharCode(65 + i);
+	   if (clickable) {
+		   ('#'+letter).attr('disabled', false);
+	   } else {
+		   ('#'+letter).attr('disabled', true);
+	   }
+  }
 
   startGame() {
     $(".startPage").hide(1000);
@@ -138,7 +148,6 @@ const ViewEngine = {
 
   // Hidden Word -> _ _ _ _ _ 
   showMysteryWord(word) {
-	GameStatusData.word = word;
     for (i = 0; i < word.length; i++) {
       $('.letterGuess').append('<div class="letterGuessDiv" id="letter'+i+'">'+'</div>')
     }
@@ -194,30 +203,30 @@ const ViewEngine = {
         $(".playAgain").addClass("mouseOver");});
        $(".playAgain").mouseout(function(){
        $(".playAgain").removeClass("mouseOver")});
-      $('.freemonBox button').click(GameController.nextLevel);
+      $('.freemonBox button').click(GameController.handleGameStart);
   },
 
   markUsed(event) { // TO-DO : mark different when wrong letter
     var letterId = event.data.letterId;
-    if (GameStatusData.letterInWord(letterId)) { // corect
-      $('#'+letterId).addClass('selected');
-      ViewEngine.revealLetter(letterId);
-
+    if (GameStatusData.letterInWord(letterId)) { // correct
+    		$('#'+letterId).addClass('selected');
+    		ViewEngine.revealLetter(letterId);
     } else { // wrong
-      $('#'+letterId).addClass('wrong-selected');
-      $('.freemonBox').append('<div class="wrongBar" style="z-index:1">')
-      // if the guess value reaches 0 ( 10 guesses) --> endGame()
-      GameStatusData.guess--;
-      $('.liveLeftNum').text(GameStatusData.guess); // update guess
-      if (GameStatusData.guess == 0) {
-        ViewEngine.endGame(); // game over
-      }
+		$('#'+letterId).addClass('wrong-selected');
+		$('.freemonBox').append('<div class="wrongBar" style="z-index:1">')
+		// if the guess value reaches 0 ( 10 guesses) --> endGame()
+		GameStatusData.guess--;
+		$('.liveLeftNum').text(GameStatusData.guess); // update guess
+		if (GameStatusData.guess == 0) {
+		  	ViewEngine.endGame(); // game over
+		}
     }
     $('#'+letterId).attr('disabled', true); // prevent double click
     if (ViewEngine.winCheck()) {
-      GameStatusData.score++;
-      $('.scoreNum').text(GameStatusData.score);
-      setTimeout(ViewEngine.nextGame, 2000);
+    		setClickableLetterBoard
+    		GameStatusData.score++;
+    		$('.scoreNum').text(GameStatusData.score);
+    		setTimeout(ViewEngine.nextGame, 2000);
     }
   },
 
@@ -250,8 +259,8 @@ const GameController = {
     ViewEngine.startGame();
     GameStatusData.addUser(name);
     Promise.resolve(GameStatusData.chooseRandomWord()).then(function(v) {
-		GameStatusData.word = v;
-    		ViewEngine.showMysteryWord(v);
+		GameStatusData.word = v.toUpperCase();
+    		ViewEngine.showMysteryWord(GameStatusData.word);
     });
     ViewEngine.prepareLetterBoard();
     var pokeId = GameStatusData.pokeId;
@@ -336,8 +345,7 @@ const GameController = {
 }
 
 
-function 
-(route) {
+function requestPromise(route) {
     const errorMessage = 'We were unable to process your request at this time.  Please try again later.';
     return new Promise((resolve, reject) => {
             $.ajax({

@@ -33,10 +33,6 @@ const GameStatusData = {
       }
     },
 
-    fetchPokemon(orderId) {
-        return requestPromise('/work/orders/shipping/fba/items?orderId=' + orderId);
-    },
-
     setPokemon(pokeId) {
       this.pokeId = pokeId;
     },    
@@ -64,12 +60,12 @@ const GameStatusData = {
     },
 
     letterInWord(letter) {
-      for (i=0;i<this.word.length;i++) {
-        if (letter == this.word[i]) {
-          return true;
-        }
-      }
-      return false;
+    		for (i=0;i<this.word.length;i++) {
+    			if (letter == this.word[i]) {
+    				return true;
+    			}
+    		}
+    		return false;
     },
 
     startGame(){
@@ -142,7 +138,6 @@ const ViewEngine = {
 
   // Hidden Word -> _ _ _ _ _ 
   showMysteryWord(word) {
-	GameStatusData.word = word;
     for (i = 0; i < word.length; i++) {
       $('.letterGuess').append('<div class="letterGuessDiv" id="letter'+i+'">'+'</div>')
     }
@@ -198,15 +193,14 @@ const ViewEngine = {
         $(".playAgain").addClass("mouseOver");});
        $(".playAgain").mouseout(function(){
        $(".playAgain").removeClass("mouseOver")});
-      $('.freemonBox button').click(GameController.nextLevel);
+      $('.freemonBox button').click(GameController.handleGameStart);
   },
 
   markUsed(event) { // TO-DO : mark different when wrong letter
     var letterId = event.data.letterId;
-    if (GameStatusData.letterInWord(letterId)) { // corect
+    if (GameStatusData.letterInWord(letterId)) { // correct
       $('#'+letterId).addClass('selected');
       ViewEngine.revealLetter(letterId);
-
     } else { // wrong
       $('#'+letterId).addClass('wrong-selected');
       $('.freemonBox').append('<div class="wrongBar" style="z-index:1">')
@@ -254,13 +248,12 @@ const GameController = {
     ViewEngine.startGame();
     GameStatusData.addUser(name);
     Promise.resolve(GameStatusData.chooseRandomWord()).then(function(v) {
-		GameStatusData.word = v;
-    		ViewEngine.showMysteryWord(v);
+		GameStatusData.word = v.toUpperCase();
+    		ViewEngine.showMysteryWord(GameStatusData.word);
     });
     ViewEngine.prepareLetterBoard();
     var pokeId = GameStatusData.pokeId;
     ViewEngine.showChosenFreemon(pokeId);
-    
   },
 
 // https://teamtreehouse.com/community/jquery-click-method-using-named-function
