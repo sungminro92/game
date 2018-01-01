@@ -59,9 +59,8 @@ const GameStatusData = {
 
     chooseRandomWord() {
 //      var word = this.wordBank[Math.floor(Math.random()*this.wordBank.length)];
-    		var urlParams = new URLSearchParams(window.location.search);
 		$.ajax({
-		url: "/getWord?level="+urlParams.get('level'),
+		url: "/getWord?level="+getParameterByName('level'),
 		type: 'GET',
 		dataType: 'json', // added data type
 		    success: function(res) {
