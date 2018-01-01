@@ -9,6 +9,10 @@
    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet"/>
    <script>
    window.onload = function() {
+	   
+	var urlParams = new URLSearchParams(window.location.search);
+	GameStatusData.pokeId = urlParams.get('pokeId');
+	GameStatusData.difficultyLevel = urlParams.get('level');
    	GameController.handleGameStart();
    }
    </script>

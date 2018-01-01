@@ -59,17 +59,8 @@ const GameStatusData = {
 
     chooseRandomWord() {
 //      var word = this.wordBank[Math.floor(Math.random()*this.wordBank.length)];
-		$.ajax({
-		url: "/getWord?level="+getParameterByName('level'),
-		type: 'GET',
-		dataType: 'json', // added data type
-		    success: function(res) {
-		        console.log(res);
-		        alert(res);
-		    }
-		});
-		this.word = word;
-		return word;
+    		var urlParams = new URLSearchParams(window.location.search);
+		return requestPromise("/getWord?level="+GameStatusData.difficultyLevel);
     },
 
     letterInWord(letter) {
@@ -101,6 +92,7 @@ const GameStatusData = {
       this.word = null;
       this.guess = 10;
     }
+
 };
 
 // User Interface // LISTS OF FUNCTIONS/ CALLING    
@@ -150,6 +142,7 @@ const ViewEngine = {
 
   // Hidden Word -> _ _ _ _ _ 
   showMysteryWord(word) {
+	GameStatusData.word = word;
     for (i = 0; i < word.length; i++) {
       $('.letterGuess').append('<div class="letterGuessDiv" id="letter'+i+'">'+'</div>')
     }
@@ -260,8 +253,10 @@ const GameController = {
     var name = $('#userName').val();
     ViewEngine.startGame();
     GameStatusData.addUser(name);
-    var word = GameStatusData.chooseRandomWord();
-    ViewEngine.showMysteryWord(word);
+    Promise.resolve(GameStatusData.chooseRandomWord()).then(function(v) {
+		GameStatusData.word = v;
+    		ViewEngine.showMysteryWord(v);
+    });
     ViewEngine.prepareLetterBoard();
     var pokeId = GameStatusData.pokeId;
     ViewEngine.showChosenFreemon(pokeId);
@@ -288,7 +283,9 @@ const GameController = {
     ViewEngine.prepareLetterBoard();
     var word = GameStatusData.chooseRandomWord();
     ViewEngine.showMysteryWord(word);
-    var pokeId = GameStatusData.pokeId;
+    var urlParams = new URLSearchParams(window.location.search);
+//    var pokeId = GameStatusData.pokeId;
+    var pokeId = urlParams.get('pokeId');
     ViewEngine.showChosenFreemon(pokeId);
   },
 
@@ -331,7 +328,7 @@ const GameController = {
   $('#poke4').click({pokeId:'poke4'},GameController.selectPokeButton);
   //$('#playGame').click(GameController.handleGameStart);
   $('#playGame').click(function() {
-	  window.location.replace(location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '')+'/freemon?level='+GameStatusData.difficultyLevel);
+	  window.location.replace(location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '')+'/freemon?level='+GameStatusData.difficultyLevel+'&pokeId='+GameStatusData.pokeId);
   })
   $("#playGame").mouseover(function(){
 	  $("#playGame").addClass("mouseOver");
@@ -341,4 +338,25 @@ const GameController = {
       $("#playGame").removeClass("mouseOver");
       $("#playGame").text("GOTTA FREE 'EM ALL");
   });
+}
+
+
+function requestPromise(route) {
+    const errorMessage = 'We were unable to process your request at this time.  Please try again later.';
+    return new Promise((resolve, reject) => {
+            $.ajax({
+            url: route,
+            type: "GET",
+            async: true,
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert(errorMessage);
+            },
+            success: function (data, textStatus, jqXHR) {
+                if (!data) {
+                    alert(errorMessage);
+                }
+                return resolve(data);
+            }
+        });
+    }).catch();
 }
