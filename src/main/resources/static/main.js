@@ -68,11 +68,11 @@ const GameStatusData = {
     		return false;
     },
 
-    startGame(){
-      if (this.isPlaying == false) {
-      this.isPlaying = true;
-      }
-    },
+//    startGame(){
+//      if (this.isPlaying == false) {
+//      this.isPlaying = true;
+//      }
+//    },
 
     resetGame() {
       this.isPlaying= false;
@@ -132,20 +132,6 @@ const ViewEngine = {
 
   },
 
-  restartGame() {
-    $('#easyBttn').removeClass('selected');
-    $('#hardBttn').removeClass('selected');
-    $('#poke1').removeClass('selected');
-    $('#poke2').removeClass('selected');
-    $('#poke3').removeClass('selected');
-    $('#poke4').removeClass('selected');
-    $('#userName').val("");
-    $(".gameScreen").hide(1000);
-    $(".startPage").show(1000);
-    GameStatusData.resetGame();
-    GameController.handleGameStart();
-  },
-
   // Hidden Word -> _ _ _ _ _ 
   showMysteryWord(word) {
     for (i = 0; i < word.length; i++) {
@@ -175,23 +161,7 @@ const ViewEngine = {
      }
    },
 
-
-  endGame() {  // GAME OVER
-      $('.letterGuess').empty(); 
-      $('.alphabetLists').empty();
-      $('.instruction').hide();
-      $( ".wrongBar" ).remove();
-      $('.freemonBox').empty();
-      $('.freemonBox').append('<div style="color:red; display:block; margin-top:50px; font-size: 40px">GAME OVER</div>');
-      $('.freemonBox').append('<button class="playAgain">PLAY AGAIN</button>');
-      $(".playAgain").mouseover(function(){
-        $(".playAgain").addClass("mouseOver");});
-      $(".playAgain").mouseout(function(){
-        $(".playAgain").removeClass("mouseOver")});
-      $('.freemonBox button').click(ViewEngine.restartGame);
-  },
-
-  nextGame() {  // GAME OVER
+  nextGame() {
       $('.letterGuess').empty();
       $('.alphabetLists').empty();
       $('.instruction').hide();
@@ -219,6 +189,7 @@ const ViewEngine = {
 		$('.liveLeftNum').text(GameStatusData.guess); // update guess
 		if (GameStatusData.guess == 0) {
 		  	ViewEngine.endGame(); // game over
+		  	window.location.replace(location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: ''));
 		}
     }
     $('#'+letterId).attr('disabled', true); // prevent double click
@@ -256,7 +227,7 @@ const GameController = {
     $('.freemonBox').empty();
     $('.instruction').show();
     var name = $('#userName').val();
-    ViewEngine.startGame();
+//    ViewEngine.startGame();
     GameStatusData.addUser(name);
     Promise.resolve(GameStatusData.chooseRandomWord()).then(function(v) {
 		GameStatusData.word = v.toUpperCase();
