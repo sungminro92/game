@@ -136,7 +136,7 @@ const ViewEngine = {
     $(".gameScreen").hide(1000);
     $(".startPage").show(1000);
     GameStatusData.resetGame();
-    //GameController.handleGameStart();
+    GameController.handleGameStart();
   },
 
   // Hidden Word -> _ _ _ _ _ 
@@ -252,7 +252,6 @@ const GameController = {
     ViewEngine.startGame();
     GameStatusData.addUser(name);
     var word = GameStatusData.chooseRandomWord();
-    window.location.replace("http://localhost:8080/freemon");
     ViewEngine.showMysteryWord(word);
     ViewEngine.prepareLetterBoard();
     var pokeId = GameStatusData.pokeId;
@@ -321,15 +320,16 @@ const GameController = {
   $('#poke2').click({pokeId:'poke2'},GameController.selectPokeButton);
   $('#poke3').click({pokeId:'poke3'},GameController.selectPokeButton);
   $('#poke4').click({pokeId:'poke4'},GameController.selectPokeButton);
-  $('#playGame').click(GameController.handleGameStart);
-      $("#playGame").mouseover(function(){
-      $("#playGame").addClass("mouseOver");
-      $(".mouseOver").text('PLAY GAME');
-    });
-    $("#playGame").mouseout(function(){
+  //$('#playGame').click(GameController.handleGameStart);
+  $('#playGame').click(function() {
+	  window.location.replace(location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: ''););
+  })
+  $("#playGame").mouseover(function(){
+	  $("#playGame").addClass("mouseOver");
+	  $(".mouseOver").text('PLAY GAME');
+  });
+  $("#playGame").mouseout(function(){
       $("#playGame").removeClass("mouseOver");
       $("#playGame").text("GOTTA FREE 'EM ALL");
-    });
+  });
 }
-
-// CREATING EMPTY LETTERBOXES
