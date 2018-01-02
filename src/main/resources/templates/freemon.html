@@ -8,8 +8,11 @@
    <link rel="stylesheet" type="text/css" href="/stylesheet.css"/>
    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet"/>
    <script>
-   window.onload = function() {
-   	GameController.handleGameStart();
+	window.onload = function() {
+		var urlParams = new URLSearchParams(window.location.search);
+		GameStatusData.pokeId = urlParams.get('pokeId');
+		GameStatusData.difficultyLevel = urlParams.get('level');
+	  	GameController.handleGameStart();
    }
    </script>
 </head>
@@ -27,7 +30,6 @@
 	      <p class="instruction">Pick your Letters!</p>
 	   </div>
 		<div class="alphabetLists"></div>
-		   
 	</div>
 </body>
 </html>

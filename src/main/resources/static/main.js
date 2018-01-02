@@ -33,10 +33,6 @@ const GameStatusData = {
       }
     },
 
-    fetchPokemon(orderId) {
-        return requestPromise('/work/orders/shipping/fba/items?orderId=' + orderId);
-    },
-
     setPokemon(pokeId) {
       this.pokeId = pokeId;
     },    
@@ -58,24 +54,18 @@ const GameStatusData = {
     },
 
     chooseRandomWord() {
-      var word = this.wordBank[Math.floor(Math.random()*this.wordBank.length)];
-      this.word = word;
-      return word;
+//      var word = this.wordBank[Math.floor(Math.random()*this.wordBank.length)];
+    		var urlParams = new URLSearchParams(window.location.search);
+		return requestPromise("/getWord?level="+GameStatusData.difficultyLevel);
     },
 
     letterInWord(letter) {
-      for (i=0;i<this.word.length;i++) {
-        if (letter == this.word[i]) {
-          return true;
-        }
-      }
-      return false;
-    },
-
-    startGame(){
-      if (this.isPlaying == false) {
-      this.isPlaying = true;
-      }
+    		for (i=0;i<this.word.length;i++) {
+    			if (letter == this.word[i]) {
+    				return true;
+    			}
+    		}
+    		return false;
     },
 
     resetGame() {
@@ -118,25 +108,21 @@ const ViewEngine = {
        $(letterBank).append(letterButton);
     }
   },
-
-  startGame() {
-    $(".startPage").hide(1000);
-    $(".gameScreen").show(1000);
-
+  
+  setClickableLetterBoard(clickable) {
+	for (i =0;i<26;i++) {
+	   var letter = String.fromCharCode(65 + i);
+	   if (clickable) {
+		   ('#'+letter).attr('disabled', false);
+	   } else {
+		   ('#'+letter).attr('disabled', true);
+	   }
+	}
   },
 
-  restartGame() {
-    $('#easyBttn').removeClass('selected');
-    $('#hardBttn').removeClass('selected');
-    $('#poke1').removeClass('selected');
-    $('#poke2').removeClass('selected');
-    $('#poke3').removeClass('selected');
-    $('#poke4').removeClass('selected');
-    $('#userName').val("");
-    $(".gameScreen").hide(1000);
-    $(".startPage").show(1000);
-    GameStatusData.resetGame();
-    GameController.handleGameStart();
+  startGame() {
+    $(".gameScreen").show(1000);
+
   },
 
   // Hidden Word -> _ _ _ _ _ 
@@ -168,8 +154,7 @@ const ViewEngine = {
      }
    },
 
-
-  endGame() {  // GAME OVER
+   endGame() {  // GAME OVER
       $('.letterGuess').empty(); 
       $('.alphabetLists').empty();
       $('.instruction').hide();
@@ -181,10 +166,10 @@ const ViewEngine = {
         $(".playAgain").addClass("mouseOver");});
       $(".playAgain").mouseout(function(){
         $(".playAgain").removeClass("mouseOver")});
-      $('.freemonBox button').click(ViewEngine.restartGame);
+      $('.freemonBox button').click(window.location.replace(location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '')));
   },
 
-  nextGame() {  // GAME OVER
+  nextGame() {
       $('.letterGuess').empty();
       $('.alphabetLists').empty();
       $('.instruction').hide();
@@ -196,30 +181,30 @@ const ViewEngine = {
         $(".playAgain").addClass("mouseOver");});
        $(".playAgain").mouseout(function(){
        $(".playAgain").removeClass("mouseOver")});
-      $('.freemonBox button').click(GameController.nextLevel);
+      $('.freemonBox button').click(GameController.handleGameStart);
   },
 
   markUsed(event) { // TO-DO : mark different when wrong letter
     var letterId = event.data.letterId;
-    if (GameStatusData.letterInWord(letterId)) { // corect
-      $('#'+letterId).addClass('selected');
-      ViewEngine.revealLetter(letterId);
-
+    if (GameStatusData.letterInWord(letterId)) { // correct
+    		$('#'+letterId).addClass('selected');
+    		ViewEngine.revealLetter(letterId);
     } else { // wrong
-      $('#'+letterId).addClass('wrong-selected');
-      $('.freemonBox').append('<div class="wrongBar" style="z-index:1">')
-      // if the guess value reaches 0 ( 10 guesses) --> endGame()
-      GameStatusData.guess--;
-      $('.liveLeftNum').text(GameStatusData.guess); // update guess
-      if (GameStatusData.guess == 0) {
-        ViewEngine.endGame(); // game over
-      }
+		$('#'+letterId).addClass('wrong-selected');
+		$('.freemonBox').append('<div class="wrongBar" style="z-index:1">')
+		// if the guess value reaches 0 ( 10 guesses) --> endGame()
+		GameStatusData.guess--;
+		$('.liveLeftNum').text(GameStatusData.guess); // update guess
+		if (GameStatusData.guess == 0) {
+		  	ViewEngine.endGame(); // game over
+		}
     }
     $('#'+letterId).attr('disabled', true); // prevent double click
     if (ViewEngine.winCheck()) {
-      GameStatusData.score++;
-      $('.scoreNum').text(GameStatusData.score);
-      setTimeout(ViewEngine.nextGame, 2000);
+    		setClickableLetterBoard
+    		GameStatusData.score++;
+    		$('.scoreNum').text(GameStatusData.score);
+    		setTimeout(ViewEngine.nextGame, 2000);
     }
   },
 
@@ -249,14 +234,15 @@ const GameController = {
     $('.freemonBox').empty();
     $('.instruction').show();
     var name = $('#userName').val();
-    ViewEngine.startGame();
+	ViewEngine.startGame();
     GameStatusData.addUser(name);
-    var word = GameStatusData.chooseRandomWord();
-    ViewEngine.showMysteryWord(word);
+    Promise.resolve(GameStatusData.chooseRandomWord()).then(function(v) {
+		GameStatusData.word = v.toUpperCase();
+    		ViewEngine.showMysteryWord(GameStatusData.word);
+    });
     ViewEngine.prepareLetterBoard();
     var pokeId = GameStatusData.pokeId;
     ViewEngine.showChosenFreemon(pokeId);
-    
   },
 
 // https://teamtreehouse.com/community/jquery-click-method-using-named-function
@@ -279,7 +265,9 @@ const GameController = {
     ViewEngine.prepareLetterBoard();
     var word = GameStatusData.chooseRandomWord();
     ViewEngine.showMysteryWord(word);
-    var pokeId = GameStatusData.pokeId;
+    var urlParams = new URLSearchParams(window.location.search);
+//    var pokeId = GameStatusData.pokeId;
+    var pokeId = urlParams.get('pokeId');
     ViewEngine.showChosenFreemon(pokeId);
   },
 
@@ -322,7 +310,7 @@ const GameController = {
   $('#poke4').click({pokeId:'poke4'},GameController.selectPokeButton);
   //$('#playGame').click(GameController.handleGameStart);
   $('#playGame').click(function() {
-	  window.location.replace(location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: ''););
+	  window.location.replace(location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '')+'/freemon?level='+GameStatusData.difficultyLevel+'&pokeId='+GameStatusData.pokeId);
   })
   $("#playGame").mouseover(function(){
 	  $("#playGame").addClass("mouseOver");
@@ -332,4 +320,24 @@ const GameController = {
       $("#playGame").removeClass("mouseOver");
       $("#playGame").text("GOTTA FREE 'EM ALL");
   });
+}
+
+function requestPromise(route) {
+    const errorMessage = 'We were unable to process your request at this time.  Please try again later.';
+    return new Promise((resolve, reject) => {
+            $.ajax({
+            url: route,
+            type: "GET",
+            async: true,
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert(errorMessage);
+            },
+            success: function (data, textStatus, jqXHR) {
+                if (!data) {
+                    alert(errorMessage);
+                }
+                return resolve(data);
+            }
+        });
+    }).catch();
 }

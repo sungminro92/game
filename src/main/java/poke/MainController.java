@@ -29,15 +29,17 @@ public class MainController {
 
 	@Autowired
 	GameServiceI gameService;
-	
+
 	@RequestMapping(value = "/restart", method = RequestMethod.POST)
 	@ResponseBody
 	public ModelAndView restart(ModelMap model) {
 		return new ModelAndView("index");
 	}
 
-	@RequestMapping(value = "/freemon")
-	public String getPokemon(ModelMap model) {
+	@RequestMapping(value = "/getWord")
+	@ResponseBody
+	public String getWord(ModelMap model,
+			@RequestParam(value = "level", required = true) String level) {
 //		StringBuffer response = new StringBuffer();
 //		try {
 //			URL url = new URL("https://pokeapi.co/api/v2/generation/1/"); // MalformedURLException
@@ -69,6 +71,11 @@ public class MainController {
 //			System.out.println("Unable to read connection. " + ioe.getMessage());
 //		}
 
+		return "charmander";
+	}
+
+	@RequestMapping(value = "/freemon")
+	public String getPokemon(ModelMap model) {
 		model.addAttribute("word", "Charmander");
 
 		return "freemon";
