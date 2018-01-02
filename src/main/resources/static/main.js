@@ -166,7 +166,9 @@ const ViewEngine = {
         $(".playAgain").addClass("mouseOver");});
       $(".playAgain").mouseout(function(){
         $(".playAgain").removeClass("mouseOver")});
-      $('.freemonBox button').click(window.location.replace(location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '')));
+      $('.freemonBox button').click(function() {
+    	  	window.location.replace(location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: ''));
+      });
   },
 
   nextGame() {
