@@ -161,6 +161,21 @@ const ViewEngine = {
        $('.freemonBox').append('<img class="freemonshow" src="http://i.imgur.com/DHPLNaD.png" />');
      }
    },
+   
+   endGame() {  // GAME OVER
+      $('.letterGuess').empty(); 
+      $('.alphabetLists').empty();
+      $('.instruction').hide();
+      $( ".wrongBar" ).remove();
+      $('.freemonBox').empty();
+      $('.freemonBox').append('<div style="color:red; display:block; margin-top:50px; font-size: 40px">GAME OVER</div>');
+      $('.freemonBox').append('<button class="playAgain">PLAY AGAIN</button>');
+      $(".playAgain").mouseover(function(){
+        $(".playAgain").addClass("mouseOver");});
+      $(".playAgain").mouseout(function(){
+        $(".playAgain").removeClass("mouseOver")});
+      $('.freemonBox button').click(window.location.replace(location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '')));
+  },
 
   nextGame() {
       $('.letterGuess').empty();
@@ -190,7 +205,6 @@ const ViewEngine = {
 		$('.liveLeftNum').text(GameStatusData.guess); // update guess
 		if (GameStatusData.guess == 0) {
 		  	ViewEngine.endGame(); // game over
-		  	window.location.replace(location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: ''));
 		}
     }
     $('#'+letterId).attr('disabled', true); // prevent double click
