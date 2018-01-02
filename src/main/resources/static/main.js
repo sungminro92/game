@@ -113,9 +113,9 @@ const ViewEngine = {
 	for (i =0;i<26;i++) {
 	   var letter = String.fromCharCode(65 + i);
 	   if (clickable) {
-		   ('#'+letter).attr('disabled', false);
+		   $('#'+letter).attr('disabled', false);
 	   } else {
-		   ('#'+letter).attr('disabled', true);
+		   $('#'+letter).attr('disabled', true);
 	   }
 	}
   },
@@ -203,7 +203,7 @@ const ViewEngine = {
     }
     $('#'+letterId).attr('disabled', true); // prevent double click
     if (ViewEngine.winCheck()) {
-    		setClickableLetterBoard
+    	ViewEngine.setClickableLetterBoard(false);
     		GameStatusData.score++;
     		$('.scoreNum').text(GameStatusData.score);
     		setTimeout(ViewEngine.nextGame, 2000);
