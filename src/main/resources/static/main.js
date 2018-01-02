@@ -124,7 +124,8 @@ const ViewEngine = {
 	   } else {
 		   ('#'+letter).attr('disabled', true);
 	   }
-  }
+	}
+  },
 
   startGame() {
     $(".startPage").hide(1000);
