@@ -68,12 +68,6 @@ const GameStatusData = {
     		return false;
     },
 
-//    startGame(){
-//      if (this.isPlaying == false) {
-//      this.isPlaying = true;
-//      }
-//    },
-
     resetGame() {
       this.isPlaying= false;
       this.difficultyLevel = null;
@@ -128,7 +122,6 @@ const ViewEngine = {
   },
 
   startGame() {
-    $(".startPage").hide(1000);
     $(".gameScreen").show(1000);
 
   },
@@ -242,7 +235,7 @@ const GameController = {
     $('.freemonBox').empty();
     $('.instruction').show();
     var name = $('#userName').val();
-//    ViewEngine.startGame();
+	ViewEngine.startGame();
     GameStatusData.addUser(name);
     Promise.resolve(GameStatusData.chooseRandomWord()).then(function(v) {
 		GameStatusData.word = v.toUpperCase();
