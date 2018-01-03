@@ -34,7 +34,8 @@ button {
 
 }
 
-.buttons button {
+.buttons button,select {
+   font-family: inherit;
    display: inline;
    width: 100px;
    height: 45px;

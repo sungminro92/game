@@ -39,48 +39,55 @@ public class MainController {
 	@RequestMapping(value = "/getWord")
 	@ResponseBody
 	public String getWord(ModelMap model,
-			@RequestParam(value = "level", required = true) String level) {
-//		StringBuffer response = new StringBuffer();
-//		try {
-//			URL url = new URL("https://pokeapi.co/api/v2/generation/1/"); // MalformedURLException
-//			HttpURLConnection con = (HttpURLConnection) url.openConnection(); // IOException
-//			con.addRequestProperty("User-Agent", USER_AGENT);
-//			con.setRequestMethod("GET"); // ProtocolException
-//
-//			int responseCode = con.getResponseCode(); // IOException
-//			if (responseCode != HttpURLConnection.HTTP_OK) {
-//
-//			}
-//
-//			BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-//			String output;
-//			response = new StringBuffer();
-//
-//			while ((output = in.readLine()) != null) {
-//				response.append(output);
-//			}
-//			in.close();
-//
-//			System.out.println(response.toString());
-//
-//		} catch (MalformedURLException me) {
-//			System.out.println("URL not valid. " + me.getMessage());
-//		} catch (ProtocolException pe) {
-//			System.out.println("GET Protocol not valid. " + pe.getMessage());
-//		} catch (IOException ioe) {
-//			System.out.println("Unable to read connection. " + ioe.getMessage());
-//		}
+			@RequestParam(value = "level", required = true) String level,
+			@RequestParam(value = "generation", defaultValue = "1") int generation) {
+		StringBuffer response = new StringBuffer();
+		try {
+			String urlString = String.format("https://pokeapi.co/api/v2/generation/%d/", generation);
+			URL url = new URL(urlString); // MalformedURLException
+			HttpURLConnection con = (HttpURLConnection) url.openConnection(); // IOException
+			con.addRequestProperty("User-Agent", USER_AGENT);
+			con.setRequestMethod("GET"); // ProtocolException
 
-		return "charmander";
+			int responseCode = con.getResponseCode(); // IOException
+			if (responseCode != HttpURLConnection.HTTP_OK) {
+
+			}
+
+			BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+			String output;
+			response = new StringBuffer();
+
+			while ((output = in.readLine()) != null) {
+				response.append(output);
+			}
+			in.close();
+
+			String pokemon = gameService.chooseRandomWord(response.toString());
+			return pokemon;
+
+		} catch (MalformedURLException me) {
+			System.out.println("URL not valid. " + me.getMessage());
+		} catch (ProtocolException pe) {
+			System.out.println("GET Protocol not valid. " + pe.getMessage());
+		} catch (IOException ioe) {
+			System.out.println("Unable to read connection. " + ioe.getMessage());
+		}
+
+		return null;
 	}
 
 	@RequestMapping(value = "/freemon")
 	public String getPokemon(ModelMap model) {
-		model.addAttribute("word", "Charmander");
-
 		return "freemon";
 	}
 
+	/**
+	 * Example mapping using Thymeleaf
+	 * @param name
+	 * @param model
+	 * @return 
+	 */
 	@RequestMapping("/greeting")
 	public String greeting(@RequestParam(value = "name", required = false, defaultValue = "World") String name,
 			Model model) {

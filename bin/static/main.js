@@ -23,6 +23,7 @@ const GameStatusData = {
     word: null, // current word
     guess: 10, //
     score:0,
+    generation:0,
 
     setDifficultyLevel(level) {
       this.difficultyLevel = level;
@@ -56,7 +57,7 @@ const GameStatusData = {
     chooseRandomWord() {
 //      var word = this.wordBank[Math.floor(Math.random()*this.wordBank.length)];
     		var urlParams = new URLSearchParams(window.location.search);
-		return requestPromise("/getWord?level="+GameStatusData.difficultyLevel);
+		return requestPromise("/getWord?level="+GameStatusData.difficultyLevel+'&generation='+GameStatusData.generation);
     },
 
     letterInWord(letter) {
@@ -312,7 +313,8 @@ const GameController = {
   $('#poke4').click({pokeId:'poke4'},GameController.selectPokeButton);
   //$('#playGame').click(GameController.handleGameStart);
   $('#playGame').click(function() {
-	  window.location.replace(location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '')+'/freemon?level='+GameStatusData.difficultyLevel+'&pokeId='+GameStatusData.pokeId);
+	  var generation = $("#generation").val();
+	  window.location.replace(location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '')+'/freemon?level='+GameStatusData.difficultyLevel+'&pokeId='+GameStatusData.pokeId+'&generation='+generation);
   })
   $("#playGame").mouseover(function(){
 	  $("#playGame").addClass("mouseOver");

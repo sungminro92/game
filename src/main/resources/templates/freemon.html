@@ -12,7 +12,18 @@
 		var urlParams = new URLSearchParams(window.location.search);
 		GameStatusData.pokeId = urlParams.get('pokeId');
 		GameStatusData.difficultyLevel = urlParams.get('level');
+		GameStatusData.generation = urlParams.get('generation');
 	  	GameController.handleGameStart();
+	  	
+	  	$(document).keypress(function(event) {
+	  	    var keycode = (event.keyCode ? event.keyCode : event.which);
+	  	    if (65<=keycode && keycode<=90) {
+	  	    		var letter = String.fromCharCode(keycode);
+	  	    } else if (97<=keycode && keycode<=122) {
+	  	    		var letter = String.fromCharCode(keycode-32);
+	  	    }
+	  	    $(letter).click();
+	  	});
    }
    </script>
 </head>

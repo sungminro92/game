@@ -2,6 +2,6 @@ package service;
 
 public interface GameServiceI {
 
-	public String chooseRandomWord();
+	public String chooseRandomWord(String data);
 	
 }
