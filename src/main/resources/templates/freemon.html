@@ -7,24 +7,28 @@
    <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
    <link rel="stylesheet" type="text/css" href="/stylesheet.css"/>
    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet"/>
-   <script>
+   <script th:inline="javascript">
 	window.onload = function() {
 		var urlParams = new URLSearchParams(window.location.search);
 		GameStatusData.pokeId = urlParams.get('pokeId');
 		GameStatusData.difficultyLevel = urlParams.get('level');
 		GameStatusData.generation = urlParams.get('generation');
 	  	GameController.handleGameStart();
-	  	
-	  	$(document).keypress(function(event) {
-	  	    var keycode = (event.keyCode ? event.keyCode : event.which);
-	  	    if (65<=keycode && keycode<=90) {
-	  	    		var letter = String.fromCharCode(keycode);
-	  	    } else if (97<=keycode && keycode<=122) {
-	  	    		var letter = String.fromCharCode(keycode-32);
-	  	    }
-	  	    $(letter).click();
-	  	});
-   }
+   	}
+	/*<![CDATA[*/
+  	$(document).keypress(function(event) {
+  	    var keycode = (event.keyCode ? event.keyCode : event.which);
+  	    var letter = null;
+  	    if (65<=keycode && keycode<=90) {
+  	    		letter = String.fromCharCode(keycode);
+  	    } else if (97<=keycode && keycode<=122) {
+  	    		letter = String.fromCharCode(keycode-32);
+  	    }
+  	    if (letter) {
+  	  	    $('#'+letter+':enabled').click();
+  	    }
+  	});
+    /*]]>*/
    </script>
 </head>
 <body >
