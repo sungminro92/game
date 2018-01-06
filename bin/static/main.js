@@ -200,6 +200,7 @@ const ViewEngine = {
 		GameStatusData.guess--;
 		$('.liveLeftNum').text(GameStatusData.guess); // update guess
 		if (GameStatusData.guess == 0) {
+    			GameStatusData.isPlaying = false;
 		  	ViewEngine.endGame(); // game over
 		}
     }
