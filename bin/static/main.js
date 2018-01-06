@@ -305,31 +305,7 @@ const GameController = {
     }
 }
 
-// CHOOSING USER PROFILE : USER NAME / DIFFICULTY / CHARACTER - NOT-FUNCTIONING YET
- window.onload = function() {
-  // https://teamtreehouse.com/community/jquery-click-method-using-named-function
-  // Connect buttons and Top-Level functions
-  // As the .click() method is just a shorthand for .on( "click", handler ), detaching is possible using .off( "click" ).
-  $('#easyBttn').click({buttonId:'easyBttn'},GameController.selectDifficultyButton);
-  $('#hardBttn').click({buttonId:'hardBttn'},GameController.selectDifficultyButton);
-  $('#poke1').click({pokeId:'poke1'},GameController.selectPokeButton);
-  $('#poke2').click({pokeId:'poke2'},GameController.selectPokeButton);
-  $('#poke3').click({pokeId:'poke3'},GameController.selectPokeButton);
-  $('#poke4').click({pokeId:'poke4'},GameController.selectPokeButton);
-  //$('#playGame').click(GameController.handleGameStart);
-  $('#playGame').click(function() {
-	  var generation = $("#generation").val();
-	  window.location.replace(location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '')+'/freemon?level='+GameStatusData.difficultyLevel+'&pokeId='+GameStatusData.pokeId+'&generation='+generation);
-  })
-  $("#playGame").mouseover(function(){
-	  $("#playGame").addClass("mouseOver");
-	  $(".mouseOver").text('PLAY GAME');
-  });
-  $("#playGame").mouseout(function(){
-      $("#playGame").removeClass("mouseOver");
-      $("#playGame").text("GOTTA FREE 'EM ALL");
-  });
-}
+
 
 function requestPromise(route) {
     const errorMessage = 'We were unable to process your request at this time.  Please try again later.';

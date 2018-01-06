@@ -1,5 +1,8 @@
 package service;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,6 +22,15 @@ public class GameService implements GameServiceI {
 
 			double randomNumber = Math.floor(Math.random() * pokemonSpecies.length());
 			final JSONObject pokemon = pokemonSpecies.getJSONObject((int)randomNumber);
+			
+			String url = pokemon.getString("url");
+			Pattern p = Pattern.compile("(?<=pokemon-species\\/).*?(?=\\/)");
+			System.out.println(url);
+		    Matcher m = p.matcher(url);
+		    m.find();
+			int pokemonId = Integer.parseInt(m.group());
+		    System.out.println(pokemonId);
+			
 			return pokemon.getString("name");
 			
 		} catch (JSONException je) {

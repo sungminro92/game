@@ -8,6 +8,7 @@
    <link rel="stylesheet" type="text/css" href="/stylesheet.css"/>
    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet"/>
    <script th:inline="javascript">
+   
 	window.onload = function() {
 		var urlParams = new URLSearchParams(window.location.search);
 		GameStatusData.pokeId = urlParams.get('pokeId');
@@ -15,6 +16,7 @@
 		GameStatusData.generation = urlParams.get('generation');
 	  	GameController.handleGameStart();
    	}
+	
 	/*<![CDATA[*/
   	$(document).keypress(function(event) {
   	    var keycode = (event.keyCode ? event.keyCode : event.which);
@@ -26,11 +28,13 @@
   	    } else if (97<=keycode && keycode<=122) {
   	    		letter = String.fromCharCode(keycode-32);
   	    }
+  	    console.log(keycode);
   	    if (letter) {
   	  	    $('#'+letter+':enabled').click();
   	    }
   	});
     /*]]>*/
+    
    </script>
 </head>
 <body >
