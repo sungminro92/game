@@ -11,7 +11,7 @@
 	window.onload = function() {
 		var urlParams = new URLSearchParams(window.location.search);
 		GameStatusData.pokeId = urlParams.get('pokeId');
-		GameStatusData.difficultyLevel = urlParams.get('level');
+		GameStatusData.setDifficultyLevel = urlParams.get('level');
 		GameStatusData.generation = urlParams.get('generation');
 	  	GameController.handleGameStart();
    	}
@@ -19,7 +19,9 @@
   	$(document).keypress(function(event) {
   	    var keycode = (event.keyCode ? event.keyCode : event.which);
   	    var letter = null;
-  	    if (65<=keycode && keycode<=90) {
+  	    if (!GameStatusData.isPlaying && keycode == 13) {
+  	    		$('.playAgain:enabled').click();
+  	    } else if (65<=keycode && keycode<=90) {
   	    		letter = String.fromCharCode(keycode);
   	    } else if (97<=keycode && keycode<=122) {
   	    		letter = String.fromCharCode(keycode-32);

@@ -98,6 +98,7 @@ const ViewEngine = {
        var letterButton = document.createElement("button");
        $(letterButton).text(letter);
        $(letterButton).attr('id',letter);
+       $(letterButton).attr('disabled', true);
        $(letterButton).addClass('letters');
        //$(letterButton).addClass('unused');
        // https://teamtreehouse.com/community/jquery-click-method-using-named-function
@@ -204,8 +205,9 @@ const ViewEngine = {
     }
     $('#'+letterId).attr('disabled', true); // prevent double click
     if (ViewEngine.winCheck()) {
-    	ViewEngine.setClickableLetterBoard(false);
+    		ViewEngine.setClickableLetterBoard(false);
     		GameStatusData.score++;
+    		GameStatusData.isPlaying = false;
     		$('.scoreNum').text(GameStatusData.score);
     		setTimeout(ViewEngine.nextGame, 2000);
     }
@@ -242,10 +244,12 @@ const GameController = {
     Promise.resolve(GameStatusData.chooseRandomWord()).then(function(v) {
 		GameStatusData.word = v.toUpperCase();
     		ViewEngine.showMysteryWord(GameStatusData.word);
+    		ViewEngine.setClickableLetterBoard(true);
     });
     ViewEngine.prepareLetterBoard();
     var pokeId = GameStatusData.pokeId;
     ViewEngine.showChosenFreemon(pokeId);
+    GameStatusData.isPlaying = true;
   },
 
 // https://teamtreehouse.com/community/jquery-click-method-using-named-function
