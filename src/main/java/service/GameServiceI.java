@@ -1,7 +1,9 @@
 package service;
 
+import model.Pokemon;
+
 public interface GameServiceI {
 
-	public String chooseRandomWord(String data);
+	public Pokemon chooseRandomWord(String data);
 	
 }

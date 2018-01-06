@@ -7,10 +7,15 @@ buildscript {
     }
 }
 
+plugins {
+	id 'io.franzbecker.gradle-lombok' version '1.11'
+}
+
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
+apply plugin: 'io.franzbecker.gradle-lombok'
 
 jar {
     baseName = 'gs-serving-web-content'
@@ -19,6 +24,10 @@ jar {
 
 repositories {
     mavenCentral()
+}
+
+lombok {
+	sha256 = ""
 }
 
 sourceCompatibility = 1.8

@@ -57,7 +57,7 @@ const GameStatusData = {
     chooseRandomWord() {
 //      var word = this.wordBank[Math.floor(Math.random()*this.wordBank.length)];
     		var urlParams = new URLSearchParams(window.location.search);
-		return requestPromise("/getWord?level="+GameStatusData.difficultyLevel+'&generation='+GameStatusData.generation);
+		return requestPromise("/getPokemon?level="+GameStatusData.difficultyLevel+'&generation='+GameStatusData.generation);
     },
 
     letterInWord(letter) {

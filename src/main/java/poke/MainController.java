@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import model.Pokemon;
 import service.GameServiceI;
 
 @Controller
@@ -36,9 +37,9 @@ public class MainController {
 		return new ModelAndView("index");
 	}
 
-	@RequestMapping(value = "/getWord")
+	@RequestMapping(value = "/getPokemon")
 	@ResponseBody
-	public String getWord(ModelMap model,
+	public String getPokemon(ModelMap model,
 			@RequestParam(value = "level", required = true) String level,
 			@RequestParam(value = "generation", defaultValue = "1") int generation) {
 		StringBuffer response = new StringBuffer();
@@ -63,8 +64,8 @@ public class MainController {
 			}
 			in.close();
 
-			String pokemon = gameService.chooseRandomWord(response.toString());
-			return pokemon;
+			Pokemon pokemon = gameService.chooseRandomWord(response.toString());
+			return pokemon.getName();
 
 		} catch (MalformedURLException me) {
 			System.out.println("URL not valid. " + me.getMessage());

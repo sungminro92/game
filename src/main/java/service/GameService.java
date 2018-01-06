@@ -10,28 +10,33 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import model.Pokemon;
+
 @Service
 public class GameService implements GameServiceI {
 	private static Logger logger = LoggerFactory.getLogger(GameService.class);
 
 	@Override
-	public String chooseRandomWord(String data) {
+	public Pokemon chooseRandomWord(String data) {
 		try {
 			final JSONObject obj = new JSONObject(data);
 			final JSONArray pokemonSpecies = obj.getJSONArray("pokemon_species");
 
 			double randomNumber = Math.floor(Math.random() * pokemonSpecies.length());
-			final JSONObject pokemon = pokemonSpecies.getJSONObject((int)randomNumber);
+			final JSONObject pokemonObj = pokemonSpecies.getJSONObject((int)randomNumber);
 			
-			String url = pokemon.getString("url");
+			String name = pokemonObj.getString("name");
+			String url = pokemonObj.getString("url");
 			Pattern p = Pattern.compile("(?<=pokemon-species\\/).*?(?=\\/)");
-			System.out.println(url);
 		    Matcher m = p.matcher(url);
 		    m.find();
 			int pokemonId = Integer.parseInt(m.group());
 		    System.out.println(pokemonId);
-			
-			return pokemon.getString("name");
+		    
+		    Pokemon pokemon = new Pokemon();
+		    pokemon.setId(pokemonId);
+		    pokemon.setName(name);
+			return pokemon;
 			
 		} catch (JSONException je) {
 			logger.error("Error parsing JSON.", je);
