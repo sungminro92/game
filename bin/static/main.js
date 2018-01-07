@@ -130,7 +130,11 @@ const ViewEngine = {
   // Hidden Word -> _ _ _ _ _
   showMysteryWord(word) {
     for (i = 0; i < word.length; i++) {
-      $('.letterGuess').append('<div class="letterGuessDiv" id="letter'+i+'">'+'</div>')
+    		if (word[i]=='-') {
+    			$('.letterGuess').append('<div class="letterGuessDiv" id="letter'+i+'">-</div>')
+    		} else {
+        		$('.letterGuess').append('<div class="letterGuessDiv" id="letter'+i+'">'+'</div>')
+    		}
     }
   },
 
@@ -144,7 +148,7 @@ const ViewEngine = {
   },
   
   showChosenFreemon2(url){
-	  $('.freemonBox').append('<img class="freemonshow" src="{0}" />'.format(url));
+	  $('.freemonBox').append('<img class="freemonshow" src='+url+' />');
   },
    // showing chosen pokemon!! -------- *** NEW ***
   showChosenFreemon(pokeId){
@@ -248,7 +252,7 @@ const GameController = {
     Promise.resolve(GameStatusData.chooseRandomPokemon()).then(function(v) {
 		GameStatusData.word = v.name.toUpperCase();
     		ViewEngine.showMysteryWord(GameStatusData.word);
-    	    ViewEngine.showChosenFreemon2(url);
+    	    ViewEngine.showChosenFreemon2(v.imgUrl);
     		ViewEngine.setClickableLetterBoard(true);
     });
     ViewEngine.prepareLetterBoard();
