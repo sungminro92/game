@@ -16,7 +16,7 @@ const hardWordBank = ['CLOYSTER','ALAKAZAM','KANGASKHAN','RHYDON','GYRADOS','TYP
 const GameStatusData = {
     user: [], // list of users
     isPlaying: false, // the status of the game
-    //playerTurn: 0, // indicates 'who is playing' supports multiplayers
+    // playerTurn: 0, // indicates 'who is playing' supports multiplayers
     difficultyLevel: null, // refers to 'difficulty level'
     pokeId: null,  // selected pokemon image
     wordBank: null, // which wordbank to get word from
@@ -55,7 +55,7 @@ const GameStatusData = {
     },
 
     chooseRandomWord() {
-//      var word = this.wordBank[Math.floor(Math.random()*this.wordBank.length)];
+// var word = this.wordBank[Math.floor(Math.random()*this.wordBank.length)];
     		var urlParams = new URLSearchParams(window.location.search);
 		return requestPromise("/getPokemon?level="+GameStatusData.difficultyLevel+'&generation='+GameStatusData.generation);
     },
@@ -85,7 +85,7 @@ const GameStatusData = {
     }
 };
 
-// User Interface // LISTS OF FUNCTIONS/ CALLING    
+// User Interface // LISTS OF FUNCTIONS/ CALLING
 const ViewEngine = {
   prepareLetterBoard() {
    var letterBank = $('.alphabetLists');
@@ -100,7 +100,7 @@ const ViewEngine = {
        $(letterButton).attr('id',letter);
        $(letterButton).attr('disabled', true);
        $(letterButton).addClass('letters');
-       //$(letterButton).addClass('unused');
+       // $(letterButton).addClass('unused');
        // https://teamtreehouse.com/community/jquery-click-method-using-named-function
        $(letterButton).click({letterId:letter},this.markUsed);
        // give a break when 13th alphabet appears.
@@ -127,7 +127,7 @@ const ViewEngine = {
 
   },
 
-  // Hidden Word -> _ _ _ _ _ 
+  // Hidden Word -> _ _ _ _ _
   showMysteryWord(word) {
     for (i = 0; i < word.length; i++) {
       $('.letterGuess').append('<div class="letterGuessDiv" id="letter'+i+'">'+'</div>')
@@ -274,7 +274,7 @@ const GameController = {
     var word = GameStatusData.chooseRandomWord();
     ViewEngine.showMysteryWord(word);
     var urlParams = new URLSearchParams(window.location.search);
-//    var pokeId = GameStatusData.pokeId;
+// var pokeId = GameStatusData.pokeId;
     var pokeId = urlParams.get('pokeId');
     ViewEngine.showChosenFreemon(pokeId);
   },

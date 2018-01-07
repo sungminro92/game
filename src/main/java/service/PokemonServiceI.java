@@ -6,6 +6,8 @@ import model.Pokemon;
 
 public interface PokemonServiceI {
 
-	public List<Pokemon> getPokemonByGeneration(int generation);
+	public List<Pokemon> getPokemonsByGeneration(int generation);
+	
+	public void fillPokemonInfo(Pokemon pokemon);
 	
 }

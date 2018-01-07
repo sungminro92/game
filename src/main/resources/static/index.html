@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-   <title>FREEMON!</title>
-   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-   <script src="/main.js"></script>
-   <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
-   <link rel="stylesheet" type="text/css" href="/stylesheet.css">
-   <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
-   <script>
+<title>FREEMON!</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script src="/main.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+<link rel="stylesheet" type="text/css" href="/stylesheet.css">
+<link href="https://fonts.googleapis.com/css?family=Press+Start+2P"
+	rel="stylesheet">
+<script>
    
 	// CHOOSING USER PROFILE : USER NAME / DIFFICULTY / CHARACTER - NOT-FUNCTIONING YET
 	window.onload = function() {
@@ -37,53 +38,53 @@
    
    </script>
 </head>
-<body >
-   <div class="logo">
-      <img src="http://i.imgur.com/hWvDDEP.png" style="width:500px" >
-   </div>
-<!-- START PAGE -->
-   <div class="startPage">
-      <div class="userInfo">
-         User Name:<br><br>
-         <input id="userName" placeholder= "TYPE HERE" type="text" name="name">
-      </div>
-      <br>
-      <p>Difficulty Level:</p>
-      <div class="buttons">
-         <button id="easyBttn">EASY</button>
-         <button id="hardBttn">HARD</button>
-      </div>
-      <br>
-      <p>Generation:</p>
-      <select id="generation" class="buttons">
-      	  <option value="" selected disabled hidden></option>
-		  <option value="1">I</option>
-		  <option value="2">II</option>
-		  <option value="3">III</option>
-		  <option value="4">IV</option>
-		  <option value="5">V</option>
-		  <option value="6">VI</option>
-		  <option value="7">VII</option>
-	  </select>
-      <br>
-      <p>Select a Pokemon to FREE!</p>
-     <button id="poke1">
-        <img  class="freemon" src="http://i.imgur.com/BPV7lgz.png">
-     </button>
-     <button id="poke2">
-        <img class="freemon" src="http://i.imgur.com/UulaHdM.png">
-     </button>
-     <button id="poke3">
-        <img class="freemon" src="http://i.imgur.com/9jdOxOj.png">
-     </button>
-     <button id="poke4">
-        <img class="freemon" src="http://i.imgur.com/DHPLNaD.png">
-     </button>
+<body>
+	<div class="logo">
+		<img src="http://i.imgur.com/hWvDDEP.png" style="width: 500px">
+	</div>
+	<!-- START PAGE -->
+	<div class="startPage">
+		<div class="userInfo">
+			User Name:<br>
+			<br> <input id="userName" placeholder="TYPE HERE" type="text"
+				name="name">
+		</div>
+		<br>
+		<p>Difficulty Level:</p>
+		<div class="buttons">
+			<button id="easyBttn">EASY</button>
+			<button id="hardBttn">HARD</button>
+		</div>
+		<br>
+		<p>Generation:</p>
+		<select id="generation" class="buttons">
+			<option value="" selected disabled hidden></option>
+			<option value="1">I</option>
+			<option value="2">II</option>
+			<option value="3">III</option>
+			<option value="4">IV</option>
+			<option value="5">V</option>
+			<option value="6">VI</option>
+			<option value="7">VII</option>
+		</select> <br>
+		<p>Select a Pokemon to FREE!</p>
+		<button id="poke1">
+			<img class="freemon" src="http://i.imgur.com/BPV7lgz.png">
+		</button>
+		<button id="poke2">
+			<img class="freemon" src="http://i.imgur.com/UulaHdM.png">
+		</button>
+		<button id="poke3">
+			<img class="freemon" src="http://i.imgur.com/9jdOxOj.png">
+		</button>
+		<button id="poke4">
+			<img class="freemon" src="http://i.imgur.com/DHPLNaD.png">
+		</button>
 
-      <div class="buttons">
-         <button id="playGame">GOTTA FREE 'EM ALL!</button>
-      </div>
-   </div>
+		<div class="buttons">
+			<button id="playGame">GOTTA FREE 'EM ALL!</button>
+		</div>
+	</div>
 
 </body>
 </html>

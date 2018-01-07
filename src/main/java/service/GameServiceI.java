@@ -6,6 +6,6 @@ import model.Pokemon;
 
 public interface GameServiceI {
 
-	public Pokemon chooseRandomWord(List<Pokemon> pokemons);
+	public Pokemon chooseRandomPokemon(List<Pokemon> pokemons);
 	
 }
