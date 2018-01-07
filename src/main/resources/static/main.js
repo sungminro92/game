@@ -54,7 +54,7 @@ const GameStatusData = {
       });
     },
 
-    chooseRandomWord() {
+    chooseRandomPokemon() {
 // var word = this.wordBank[Math.floor(Math.random()*this.wordBank.length)];
     		var urlParams = new URLSearchParams(window.location.search);
 		return requestPromise("/getPokemon?level="+GameStatusData.difficultyLevel+'&generation='+GameStatusData.generation);
@@ -142,7 +142,10 @@ const ViewEngine = {
       }
     }
   },
-
+  
+  showChosenFreemon2(url){
+	  $('.freemonBox').append('<img class="freemonshow" src="{0}" />'.format(url));
+  },
    // showing chosen pokemon!! -------- *** NEW ***
   showChosenFreemon(pokeId){
      if (pokeId == "poke1") {
@@ -242,14 +245,15 @@ const GameController = {
     var name = $('#userName').val();
 	ViewEngine.startGame();
     GameStatusData.addUser(name);
-    Promise.resolve(GameStatusData.chooseRandomWord()).then(function(v) {
-		GameStatusData.word = v.toUpperCase();
+    Promise.resolve(GameStatusData.chooseRandomPokemon()).then(function(v) {
+		GameStatusData.word = v.name.toUpperCase();
     		ViewEngine.showMysteryWord(GameStatusData.word);
+    	    ViewEngine.showChosenFreemon2(url);
     		ViewEngine.setClickableLetterBoard(true);
     });
     ViewEngine.prepareLetterBoard();
     var pokeId = GameStatusData.pokeId;
-    ViewEngine.showChosenFreemon(pokeId);
+    // ViewEngine.showChosenFreemon(pokeId);
     GameStatusData.isPlaying = true;
   },
 
@@ -264,19 +268,6 @@ const GameController = {
         $('#hardBttn').addClass("selected");
         $('#easyBttn').removeClass("selected");
     }  
-  },
-
-  nextLevel() {
-    $('.freemonBox').empty();
-    $('.instruction').show();
-    GameStatusData.nextRound();
-    ViewEngine.prepareLetterBoard();
-    var word = GameStatusData.chooseRandomWord();
-    ViewEngine.showMysteryWord(word);
-    var urlParams = new URLSearchParams(window.location.search);
-// var pokeId = GameStatusData.pokeId;
-    var pokeId = urlParams.get('pokeId');
-    ViewEngine.showChosenFreemon(pokeId);
   },
 
   selectPokeButton(event) {

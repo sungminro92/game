@@ -31,10 +31,10 @@ public class MainController {
 
 	@Autowired
 	GameServiceI gameService;
-
+	
 	@Autowired
 	ImageServiceI imageService;
-
+	
 	@Autowired
 	PokemonServiceI pokemonService;
 
@@ -46,13 +46,14 @@ public class MainController {
 
 	@RequestMapping(value = "/getPokemon")
 	@ResponseBody
-	public Pokemon getPokemon(ModelMap model, @RequestParam(value = "level", required = true) String level,
+	public Pokemon getPokemon(ModelMap model,
+			@RequestParam(value = "level", required = true) String level,
 			@RequestParam(value = "generation", defaultValue = "1") int generation) {
-
+	
 		List<Pokemon> pokemons = pokemonService.getPokemonsByGeneration(generation);
 		Pokemon pokemon = gameService.chooseRandomPokemon(pokemons);
 		pokemonService.fillPokemonInfo(pokemon);
-
+		
 		return pokemon;
 	}
 
@@ -63,10 +64,9 @@ public class MainController {
 
 	/**
 	 * Example mapping using Thymeleaf
-	 * 
 	 * @param name
 	 * @param model
-	 * @return
+	 * @return 
 	 */
 	@RequestMapping("/greeting")
 	public String greeting(@RequestParam(value = "name", required = false, defaultValue = "World") String name,
