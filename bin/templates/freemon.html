@@ -30,7 +30,7 @@
   	    		letter = String.fromCharCode(keycode-32);
   	    }
   	    if (letter) {
-  	  	    $('#'+letter+':enabled').click();
+  	  	    $('#'+letter+':enabled').trigger("click");
   	    }
   	});
     /*]]>*/

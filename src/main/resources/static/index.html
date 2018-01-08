@@ -35,6 +35,14 @@
 	        $("#playGame").text("GOTTA FREE 'EM ALL");
 	    });
 	}
+	
+	$(document).keypress(function(event) {
+  	    var keycode = (event.keyCode ? event.keyCode : event.which);
+  	    var letter = null;
+  	    if (!GameStatusData.isPlaying && keycode == 13) {
+  	    		$('#playGame:enabled').click();
+  	    }
+	});
    
    </script>
 </head>
@@ -52,8 +60,8 @@
 		<br>
 		<p>Difficulty Level:</p>
 		<div class="buttons">
-			<button id="easyBttn">EASY</button>
-			<button id="hardBttn">HARD</button>
+			<input type="button" id="easyBttn" value="EASY">
+			<input type="button" id="hardBttn" value="HARD">
 		</div>
 		<br>
 		<p>Generation:</p>
@@ -82,7 +90,7 @@
 		</button>
 
 		<div class="buttons">
-			<button id="playGame">GOTTA FREE 'EM ALL!</button>
+			<input type="button" id="playGame" value="GOTTA FREE 'EM ALL!">
 		</div>
 	</div>
 

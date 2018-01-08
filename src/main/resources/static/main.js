@@ -170,12 +170,12 @@ const ViewEngine = {
       $( ".wrongBar" ).remove();
       $('.freemonBox').empty();
       $('.freemonBox').append('<div style="color:red; display:block; margin-top:50px; font-size: 40px">GAME OVER</div>');
-      $('.freemonBox').append('<button class="playAgain">PLAY AGAIN</button>');
+      $('.freemonBox').append('<input type="button" class="playAgain" value="PLAY AGAIN">');
       $(".playAgain").mouseover(function(){
         $(".playAgain").addClass("mouseOver");});
       $(".playAgain").mouseout(function(){
         $(".playAgain").removeClass("mouseOver")});
-      $('.freemonBox button').click(function() {
+      $('.freemonBox input').click(function() {
     	  	window.location.replace(location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: ''));
       });
   },
@@ -187,12 +187,12 @@ const ViewEngine = {
       $( ".wrongBar" ).remove();
       $('.freemonBox').empty();
       $('.freemonBox').append('<div style="color:red; display:block; margin-top:50px; font-size: 40px">YOU WIN</div>');
-      $('.freemonBox').append('<button class="playAgain">NEXT WORD</button>');
+      $('.freemonBox').append('<input type="button" class="playAgain" value="NEXT WORD">');
       $(".playAgain").mouseover(function(){
         $(".playAgain").addClass("mouseOver");});
        $(".playAgain").mouseout(function(){
        $(".playAgain").removeClass("mouseOver")});
-      $('.freemonBox button').click(GameController.handleGameStart);
+      $('.freemonBox input').click(GameController.handleGameStart);
   },
 
   markUsed(event) { // TO-DO : mark different when wrong letter

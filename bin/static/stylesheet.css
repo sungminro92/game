@@ -7,9 +7,10 @@ html {
 
 body {
    text-align: center;
+   min-width: 500px;
 }
 
-button {
+input {
    font-family: inherit;
 }
 
@@ -34,7 +35,7 @@ button {
 
 }
 
-.buttons button,select {
+input, select {
    font-family: inherit;
    display: inline;
    width: 100px;
@@ -94,6 +95,7 @@ p.instruction {
    width: 47px;
    height: 47px;
    margin: 5px;
+   font-family: inherit;
    font-size: 24px;
    font-weight: bold;
    box-shadow: 2px 2px 2px #000000;
@@ -102,8 +104,6 @@ p.instruction {
 .letterGuess {}
 
 .freemonshow {
-   display: flex;
-   position: absolute;
    left: 43%;
    z-index: -1;
    height: 220px;
