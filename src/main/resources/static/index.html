@@ -23,8 +23,10 @@
 	    $('#poke4').click({pokeId:'poke4'},GameController.selectPokeButton);
 	    //$('#playGame').click(GameController.handleGameStart);
 	    $('#playGame').click(function() {
-	  		var generation = $("#generation").val();
-	  		window.location.replace(location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '')+'/freemon?level='+GameStatusData.difficultyLevel+'&pokeId='+GameStatusData.pokeId+'&generation='+generation);
+	    		if (readyToPlay()) {
+	    			window.location.replace(location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '')+'/freemon?level='+GameStatusData.difficultyLevel+'&pokeId='+GameStatusData.pokeId+'&generation='+GameStatusData.generation);
+	    		}
+	  		
 	    })
 	    $("#playGame").mouseover(function(){
 	  	  	$("#playGame").addClass("mouseOver");
@@ -43,6 +45,14 @@
   	    		$('#playGame:enabled').click();
   	    }
 	});
+	
+	function readyToPlay() {
+		return GameStatusData.difficultyLevel!=null && $("#userName").val()!="" && GameStatusData.generation!=null && GameStatusData.pokeId!=null;
+	}
+	
+	function selectGeneration() {
+		GameStatusData.generation = $('select').val();
+	}
    
    </script>
 </head>
@@ -65,7 +75,7 @@
 		</div>
 		<br>
 		<p>Generation:</p>
-		<select id="generation" class="buttons">
+		<select id="generation" class="buttons" onchange="selectGeneration()">
 			<option value="" selected disabled hidden></option>
 			<option value="1">I</option>
 			<option value="2">II</option>

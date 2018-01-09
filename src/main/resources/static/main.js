@@ -23,7 +23,7 @@ const GameStatusData = {
     word: null, // current word
     guess: 10, //
     score:0,
-    generation:0,
+    generation:null,
 
     setDifficultyLevel(level) {
       this.difficultyLevel = level;
@@ -264,7 +264,7 @@ const GameController = {
 // https://teamtreehouse.com/community/jquery-click-method-using-named-function
   selectDifficultyButton(event) {
     var level = $('#'+event.data.buttonId).text();
-    GameStatusData.setDifficultyLevel(level);
+    c.setDifficultyLevel(level);
     if (event.data.buttonId == "easyBttn") {
         $('#easyBttn').addClass("selected");
         $('#hardBttn').removeClass("selected");
@@ -299,8 +299,6 @@ const GameController = {
       }  
     }
 }
-
-
 
 function requestPromise(route) {
     const errorMessage = 'We were unable to process your request at this time.  Please try again later.';
