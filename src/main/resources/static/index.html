@@ -36,7 +36,7 @@
 	        $("#playGame").removeClass("mouseOver");
 	        $("#playGame").text("GOTTA FREE 'EM ALL");
 	    });
-	}
+	};
 	
 	$(document).keypress(function(event) {
   	    var keycode = (event.keyCode ? event.keyCode : event.which);
@@ -53,6 +53,75 @@
 	function selectGeneration() {
 		GameStatusData.generation = $('select').val();
 	}
+	
+	// Top Level Application Code //
+	const GameController = {
+
+	// https://teamtreehouse.com/community/jquery-click-method-using-named-function
+	  selectDifficultyButton(event) {
+	    var level = $('#'+event.data.buttonId).text();
+	    GameStatusData.setDifficultyLevel(level);
+	    if (event.data.buttonId == "easyBttn") {
+	        $('#easyBttn').addClass("selected");
+	        $('#hardBttn').removeClass("selected");
+	    } else {
+	        $('#hardBttn').addClass("selected");
+	        $('#easyBttn').removeClass("selected");
+	    }  
+	  },
+
+	  selectPokeButton(event) {
+	    GameStatusData.setPokemon(event.data.pokeId);
+	      if (event.data.pokeId == "poke1") {
+	          $('#poke1').addClass("selected");
+	          $('#poke2').removeClass("selected");
+	          $('#poke3').removeClass("selected");
+	          $('#poke4').removeClass("selected");
+	      } else if (event.data.pokeId == "poke2") {
+	          $('#poke2').addClass("selected");
+	          $('#poke3').removeClass("selected");
+	          $('#poke4').removeClass("selected");
+	          $('#poke1').removeClass("selected");
+	      } else if (event.data.pokeId == "poke3") {
+	          $('#poke3').addClass("selected");
+	          $('#poke4').removeClass("selected");
+	          $('#poke1').removeClass("selected");
+	          $('#poke2').removeClass("selected");
+	      } else if (event.data.pokeId == "poke4") {
+	          $('#poke4').addClass("selected");
+	          $('#poke1').removeClass("selected");
+	          $('#poke2').removeClass("selected");
+	          $('#poke3').removeClass("selected");
+	      }  
+	    }
+	};
+	
+	 // Data & Core Game Logic//
+  	const GameStatusData = {
+  	    user: [], // list of users
+  	    isPlaying: false, // the status of the game
+  	    // playerTurn: 0, // indicates 'who is playing' supports multiplayers
+  	    difficultyLevel: null, // refers to 'difficulty level'
+  	    pokeId: null,  // selected pokemon image
+  	    wordBank: null, // which wordbank to get word from
+  	    word: null, // current word
+  	    guess: 10, //
+  	    score:0,
+  	    generation:null,
+  	    
+  	  	setDifficultyLevel(level) {
+			this.difficultyLevel = level;
+    	      	if (this.difficultyLevel == 'EASY') {
+    	        		this.wordBank = easyWordBank;
+    	      	} else {
+    	        		this.wordBank = hardWordBank;
+    	      	}
+    	    },
+    	    
+    	    setPokemon(pokeId) {
+			this.pokeId = pokeId;
+		},    
+	};
    
    </script>
 </head>
@@ -63,15 +132,14 @@
 	<!-- START PAGE -->
 	<div class="startPage">
 		<div class="userInfo">
-			User Name:<br>
-			<br> <input id="userName" placeholder="TYPE HERE" type="text"
-				name="name">
+			User Name:<br> <br> <input id="userName"
+				placeholder="TYPE HERE" type="text" name="name">
 		</div>
 		<br>
 		<p>Difficulty Level:</p>
 		<div class="buttons">
-			<input type="button" id="easyBttn" value="EASY">
-			<input type="button" id="hardBttn" value="HARD">
+			<input type="button" id="easyBttn" value="EASY"> <input
+				type="button" id="hardBttn" value="HARD">
 		</div>
 		<br>
 		<p>Generation:</p>
