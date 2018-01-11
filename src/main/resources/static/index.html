@@ -3,7 +3,6 @@
 <head>
 <title>FREEMON!</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<script src="/main.js"></script>
 <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
 <link rel="stylesheet" type="text/css" href="/stylesheet.css">
 <link href="https://fonts.googleapis.com/css?family=Press+Start+2P"
@@ -109,13 +108,8 @@
   	    score:0,
   	    generation:null,
   	    
-  	  	setDifficultyLevel(level) {
-			this.difficultyLevel = level;
-    	      	if (this.difficultyLevel == 'EASY') {
-    	        		this.wordBank = easyWordBank;
-    	      	} else {
-    	        		this.wordBank = hardWordBank;
-    	      	}
+  	  	setDifficultyLevel(difficultyLevel) {
+			this.difficultyLevel = difficultyLevel;
     	    },
     	    
     	    setPokemon(pokeId) {
