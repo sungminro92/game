@@ -58,7 +58,7 @@
 
 	// https://teamtreehouse.com/community/jquery-click-method-using-named-function
 	  selectDifficultyButton(event) {
-	    var level = $('#'+event.data.buttonId).text();
+	    var level = $('#'+event.data.buttonId).val();
 	    GameStatusData.setDifficultyLevel(level);
 	    if (event.data.buttonId == "easyBttn") {
 	        $('#easyBttn').addClass("selected");
