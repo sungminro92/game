@@ -13,7 +13,7 @@
 	window.onload = function() {
 		var urlParams = new URLSearchParams(window.location.search);
 		GameStatusData.pokeId = urlParams.get('pokeId');
-		GameStatusData.setDifficultyLevel = urlParams.get('level');
+		GameStatusData.difficultyLevel = urlParams.get('level');
 		GameStatusData.generation = urlParams.get('generation');
 	  	GameController.handleGameStart();
    	}
