@@ -1,12 +1,6 @@
 package poke;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.URL;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -19,16 +13,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import model.Pokemon;
 import service.GameServiceI;
+import service.ImageServiceI;
+import service.PokemonServiceI;
 
 @Controller
 @ComponentScan("service")
 public class MainController {
 
-	private final String USER_AGENT = "Mozilla/5.0";
-
 	@Autowired
 	GameServiceI gameService;
+	
+	@Autowired
+	ImageServiceI imageService;
+	
+	@Autowired
+	PokemonServiceI pokemonService;
 
 	@RequestMapping(value = "/restart", method = RequestMethod.POST)
 	@ResponseBody
@@ -36,51 +37,30 @@ public class MainController {
 		return new ModelAndView("index");
 	}
 
-	@RequestMapping(value = "/getWord")
+	@RequestMapping(value = "/getPokemon")
 	@ResponseBody
-	public String getWord(ModelMap model,
-			@RequestParam(value = "level", required = true) String level) {
-//		StringBuffer response = new StringBuffer();
-//		try {
-//			URL url = new URL("https://pokeapi.co/api/v2/generation/1/"); // MalformedURLException
-//			HttpURLConnection con = (HttpURLConnection) url.openConnection(); // IOException
-//			con.addRequestProperty("User-Agent", USER_AGENT);
-//			con.setRequestMethod("GET"); // ProtocolException
-//
-//			int responseCode = con.getResponseCode(); // IOException
-//			if (responseCode != HttpURLConnection.HTTP_OK) {
-//
-//			}
-//
-//			BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-//			String output;
-//			response = new StringBuffer();
-//
-//			while ((output = in.readLine()) != null) {
-//				response.append(output);
-//			}
-//			in.close();
-//
-//			System.out.println(response.toString());
-//
-//		} catch (MalformedURLException me) {
-//			System.out.println("URL not valid. " + me.getMessage());
-//		} catch (ProtocolException pe) {
-//			System.out.println("GET Protocol not valid. " + pe.getMessage());
-//		} catch (IOException ioe) {
-//			System.out.println("Unable to read connection. " + ioe.getMessage());
-//		}
-
-		return "charmander";
+	public Pokemon getPokemon(ModelMap model,
+			@RequestParam(value = "level", required = true) String level,
+			@RequestParam(value = "generation", defaultValue = "1") int generation) {
+	
+		List<Pokemon> pokemons = pokemonService.getPokemonsByGeneration(generation);
+		Pokemon pokemon = gameService.chooseRandomPokemon(pokemons);
+		pokemonService.fillPokemonInfo(pokemon);
+		
+		return pokemon;
 	}
 
 	@RequestMapping(value = "/freemon")
 	public String getPokemon(ModelMap model) {
-		model.addAttribute("word", "Charmander");
-
 		return "freemon";
 	}
 
+	/**
+	 * Example mapping using Thymeleaf
+	 * @param name
+	 * @param model
+	 * @return 
+	 */
 	@RequestMapping("/greeting")
 	public String greeting(@RequestParam(value = "name", required = false, defaultValue = "World") String name,
 			Model model) {

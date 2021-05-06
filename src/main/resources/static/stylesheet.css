@@ -7,13 +7,13 @@ html {
 
 body {
    text-align: center;
+   min-width: 500px;
 }
 
-button {
+input {
    font-family: inherit;
 }
 
-/* title/logo */
 .logo {
    margin-top: 25px;
    padding-bottom: 20px;
@@ -35,7 +35,8 @@ button {
 
 }
 
-.buttons button {
+input, select {
+   font-family: inherit;
    display: inline;
    width: 100px;
    height: 45px;
@@ -94,17 +95,14 @@ p.instruction {
    width: 47px;
    height: 47px;
    margin: 5px;
+   font-family: inherit;
    font-size: 24px;
    font-weight: bold;
    box-shadow: 2px 2px 2px #000000;
 }
 
-.letterGuess {}
-
 .freemonshow {
-   display: flex;
    position: absolute;
-   left: 43%;
    z-index: -1;
    height: 220px;
    padding-top: 20px;

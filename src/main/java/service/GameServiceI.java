@@ -1,7 +1,11 @@
 package service;
 
+import java.util.List;
+
+import model.Pokemon;
+
 public interface GameServiceI {
 
-	public String chooseRandomWord();
+	public Pokemon chooseRandomPokemon(List<Pokemon> pokemons);
 	
 }

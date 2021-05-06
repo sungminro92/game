@@ -7,10 +7,15 @@ buildscript {
     }
 }
 
+plugins {
+	id 'io.franzbecker.gradle-lombok' version '1.11'
+}
+
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
+apply plugin: 'io.franzbecker.gradle-lombok'
 
 jar {
     baseName = 'gs-serving-web-content'
@@ -21,12 +26,17 @@ repositories {
     mavenCentral()
 }
 
+lombok {
+	sha256 = ""
+}
+
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
     compile("org.springframework.boot:spring-boot-devtools")
+    compile("org.json:json")
     testCompile("org.springframework.boot:spring-boot-starter-test")
 }
 
